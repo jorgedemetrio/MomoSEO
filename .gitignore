@@ -1,4 +1,4 @@
-/.gitignore
+#/.gitignore
 /.htaccess
 /administrator/cache/*
 /administrator/components/com_admin/*
@@ -533,3 +533,8 @@
 /joomla.xml
 /*.txt
 /robots.txt.dist
+.project
+.classpath
+.buildpath
+.DS_Store
+.settings

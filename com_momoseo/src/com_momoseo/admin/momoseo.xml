@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.2" method="upgrade">
+	<name>COM_ANGELGIRLS</name>
+	<creationDate>September 01, 2015</creationDate>
+	<author>Jorge Demetrio</author>
+	<authorEmail>jorge.demetrio@alldreams.com.br</authorEmail>
+	<authorUrl>www.angelgirls.com.br</authorUrl>
+	<copyright>Copyright (C) 2015. All Rights Reserved</copyright>
+	<license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
+	<version>1.0.0</version>
+	<description><![CDATA[
+		<h1>Angel Girls (v.1.0.0)</h1>
+		<div style="clear: both;"></div>
+		<p>Componente de gestor de galerias.. <strong>Built for Joomla 3.2.</strong></p>
+		<p>Created by <a href="http://www.angelgirls.com.br" target="_blank">Jorge Demetrio | www.angelgirls.com.br</a>
+	]]></description>
+
+	<!-- Runs on install/uninstall/update; New in Joomla 2.5 -->
+	<scriptfile>script.php</scriptfile>
+
+	<files folder="site">
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>router.php</filename>
+		<filename>angelgirls.php</filename>
+		<folder>assets</folder>
+		<folder>helpers</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+	</files>
+    
+
+	
+	<administration>
+		<menu img="components/com_angelgirls/assets/images/icons/angelgirls-16x16.png">COM_ANGELGIRLS_MENU</menu>
+		<submenu>
+			<!-- Instead of link you can specify individual link attributes -->
+			<menu option="com_angelgirls" view="angelgirls" img="components/com_angelgirls/assets/images/icons/angelgirls-16x16.png">COM_ANGELGIRLS_MENU_ANGELGIRLS</menu>
+			<menu option="com_angelgirls" view="galerias">COM_ANGELGIRLS_MENU_GALERIAS</menu>
+			<menu option="com_angelgirls" view="fotos">COM_ANGELGIRLS_MENU_FOTOS</menu>
+			<menu option="com_angelgirls" view="agendas">COM_ANGELGIRLS_MENU_AGENDAS</menu>
+			<menu option="com_angelgirls" view="modelos">COM_ANGELGIRLS_MENU_MODELOS</menu>
+			<menu option="com_angelgirls" view="fotografos">COM_ANGELGIRLS_MENU_FOTOGRAFOS</menu>
+			<menu option="com_angelgirls" view="equipes">COM_ANGELGIRLS_MENU_EQUIPES</menu>
+			<menu option="com_angelgirls" view="locacoes">COM_ANGELGIRLS_MENU_LOCACOES</menu>
+			<menu option="com_angelgirls" view="produtos">COM_ANGELGIRLS_MENU_PRODUTOS</menu>
+			<menu option="com_angelgirls" view="enderecos">COM_ANGELGIRLS_MENU_ENDERECOS</menu>
+			<menu option="com_angelgirls" view="telefones">COM_ANGELGIRLS_MENU_TELEFONES</menu>
+			<menu option="com_angelgirls" view="emails">COM_ANGELGIRLS_MENU_EMAILS</menu>
+			<menu option="com_angelgirls" view="dadoscomplementares">COM_ANGELGIRLS_MENU_DADOSCOMPLEMENTARES</menu>
+			<menu option="com_angelgirls" view="temas">COM_ANGELGIRLS_MENU_TEMAS</menu>
+			<menu option="com_angelgirls" view="concursos">COM_ANGELGIRLS_MENU_CONCURSOS</menu>
+			<menu link="option=com_categories&amp;extension=com_angelgirls">COM_ANGELGIRLS_MENU_MENU_CATEGORIES</menu>
+		</submenu>
+		<files folder="admin">
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>index.html</filename>
+			<filename>angelgirls.php</filename>
+			<folder>assets</folder>
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>models</folder>
+			<folder>views</folder>
+		</files>
+
+
+
+	</administration>
+</extension>
