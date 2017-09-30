@@ -2,7 +2,7 @@
 #require_once ‘PHPUnit/Framework.php’;
 //inclui o framework do phpunit
 
-#require_once diname(__FILE__).'../../../com_momoseo/script.php';
+require_once dirname(__FILE__).'/../../../main/php/com_momoseo/script.php';
 
 // indica o arquivo de classe a ser testado
 class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
@@ -19,7 +19,7 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function testInstall($parent)
+	function testInstall()
 	{
 		$this->object->install('a');
 	}
@@ -29,7 +29,7 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function testUninstall($parent)
+	function testUninstall()
 	{
 		$this->object->uninstall('a');
 	}
@@ -39,7 +39,7 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function testUpdate($parent)
+	function testUpdate()
 	{
 		$this->object->update('a');
 	}
@@ -49,9 +49,9 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function testPreflight($type, $parent)
+	function testPreflight()
 	{
-		$this->object->preflight('a');
+		$this->object->preflight('a','b');
 	}
 	
 	/**
@@ -59,9 +59,9 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function testPostflight($type, $parent)
+	function testPostflight()
 	{
-		$this->object->postflight('a');
+		$this->object->postflight('a','b');
 	}
 }
 ?>
