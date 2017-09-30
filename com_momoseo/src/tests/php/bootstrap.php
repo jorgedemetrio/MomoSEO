@@ -20,12 +20,12 @@ if (file_exists(JOOMLA_ADMIN_PATH . '/defines.php'))
 if (!defined('_JDEFINES'))
 {
 	define('JPATH_BASE', BASEPATH);
-	require_once JPATH_BASE . dirname(__FILE__).'/../admin/includes/defines.php';
+	require_once 'includes/defines.php';
 }
 
-require_once dirname(__FILE__).'/../admin/includes/framework.php';
-require_once dirname(__FILE__).'/../admin/includes/helper.php';
-require_once dirname(__FILE__).'/../admin/includes/toolbar.php';
+require_once 'includes/framework.php';
+require_once 'includes/helper.php';
+require_once 'includes/toolbar.php';
 define('JPATH_COMPONENT',JOOMLA_ADMIN_PATH.'/components/com_momoseo');
 $app = JFactory::getApplication('administrator');
 //include BASEPATH.'/controller.php';
