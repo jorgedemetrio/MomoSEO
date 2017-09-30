@@ -26,6 +26,6 @@ if (!defined('_JDEFINES'))
 require_once JPATH_BASE . '/includes/framework.php';
 require_once JPATH_BASE . '/includes/helper.php';
 require_once JPATH_BASE . '/includes/toolbar.php';
-define('JPATH_COMPONENT',JOOMLA_ADMIN_PATH.'/components/com_content');
+define('JPATH_COMPONENT',JOOMLA_ADMIN_PATH.'/components/com_momoseo');
 $app = JFactory::getApplication('administrator');
 //include BASEPATH.'/controller.php';
