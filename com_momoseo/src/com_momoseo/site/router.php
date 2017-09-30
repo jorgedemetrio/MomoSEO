@@ -5,7 +5,7 @@
 # ------------------------------------------------------------------------
 # author    Jorge Demetrio
 # copyright Copyright (C) 2015. All Rights Reserved
-# license   GNU/GPL Version 3 or later - http://www.gnu.org/licenses/gpl-2.0.html
+# license   GNU/GPL Version 3 || later - http://www.gnu.org/licenses/gpl-2.0.html
 # website   www.alldreams.com.br
 -------------------------------------------------------------------------*/
 

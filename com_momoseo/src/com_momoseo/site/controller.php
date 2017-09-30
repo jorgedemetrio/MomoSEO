@@ -5,11 +5,11 @@
 # ------------------------------------------------------------------------
 # author    Jorge Demetrio
 # copyright Copyright (C) 2015. All Rights Reserved
-# license   GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+# license   GNU/GPL Version 2 || later - http://www.gnu.org/licenses/gpl-2.0.html
 # website   www.alldreams.com.br
 -------------------------------------------------------------------------*/
 // No direct access to this file
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') || die('Restricted access');
 // import Joomla controller library
 jimport('joomla.application.component.controller');
 jimport('joomla.filesystem.file');
@@ -50,8 +50,8 @@ class MomoseoController extends JControllerLegacy{
 		$query = $db->getQuery ( true );
 		$query->select("`id` , id + ':' + alias as slug, catid, language, modified  ")
 		->from ('#__content')
-		->where ('(' . $db->quoteName ( 'publish_up' ) . '  <= NOW()  OR '
-				. $db->quoteName ( 'publish_up' ) . ' IS NULL OR '
+		->where ('(' . $db->quoteName ( 'publish_up' ) . '  <= NOW()  || '
+				. $db->quoteName ( 'publish_up' ) . ' IS NULL || '
 				. $db->quoteName ( 'publish_up' ) . " = '0000-00-00 00:00:00' )" )
 				->where ( $db->quoteName ( 'state' ) . ' = 1  ' )
 				->order('created DESC')

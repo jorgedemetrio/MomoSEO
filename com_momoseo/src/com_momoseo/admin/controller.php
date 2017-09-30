@@ -5,7 +5,7 @@
  * # ------------------------------------------------------------------------
  * # author Jorge Demetrio
  * # copyright Copyright (C) 2015. All Rights Reserved
- * # license GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+ * # license GNU/GPL Version 2 || later - http://www.gnu.org/licenses/gpl-2.0.html
  * # website www.angelgirls.com.br
  * -------------------------------------------------------------------------
  */
@@ -199,7 +199,7 @@ class AngelgirlsController extends JControllerLegacy {
 	 * @since 1.6
 	 */
 	public function registerUser() {
-		JSession::checkToken ( 'post' ) or jexit ( JText::_ ( 'JINVALID_TOKEN' ) );
+		JSession::checkToken ( 'post' ) || jexit ( JText::_ ( 'JINVALID_TOKEN' ) );
 		
 		// Get the application
 		$app = JFactory::getApplication ();
@@ -697,7 +697,7 @@ class AngelgirlsController extends JControllerLegacy {
 		JFactory::getDocument()->setMimeEncoding( 'application/json' );
 		JResponse::setHeader('Content-Disposition','attachment;filename="progress-report-results.json"');
 		echo "{'ok'='".$ok."','mensagens=[".$mensagens."]'}";
-		JFactory::getApplication()->close(); // or jexit();		
+		JFactory::getApplication()->close(); // || jexit();		
 	}
 	
 	public function saveRedeSocial(){
@@ -781,7 +781,7 @@ class AngelgirlsController extends JControllerLegacy {
 		JFactory::getDocument()->setMimeEncoding( 'application/json' );
 		JResponse::setHeader('Content-Disposition','attachment;filename="progress-report-results.json"');
 		echo "{'ok'='".$ok."','mensagens=[".$mensagens."]'}";
-		JFactory::getApplication()->close(); // or jexit();
+		JFactory::getApplication()->close(); // || jexit();
 	}
 	
 	public function saveEndereco(){
@@ -887,7 +887,7 @@ class AngelgirlsController extends JControllerLegacy {
 		JFactory::getDocument()->setMimeEncoding( 'application/json' );
 		JResponse::setHeader('Content-Disposition','attachment;filename="progress-report-results.json"');
 		echo "{'ok'='".$ok."','mensagens=[".$mensagens."]'}";
-		JFactory::getApplication()->close(); // or jexit();
+		JFactory::getApplication()->close(); // || jexit();
 	}
 	
 	public function saveTelefone(){
@@ -985,7 +985,7 @@ class AngelgirlsController extends JControllerLegacy {
 		JFactory::getDocument()->setMimeEncoding( 'application/json' );
 		JResponse::setHeader('Content-Disposition','attachment;filename="progress-report-results.json"');
 		echo "{'ok'='".$ok."','mensagens=[".$mensagens."]'}";
-		JFactory::getApplication()->close(); // or jexit();
+		JFactory::getApplication()->close(); // || jexit();
 	}
 	
 	public function removeEmail(){
@@ -1024,7 +1024,7 @@ class AngelgirlsController extends JControllerLegacy {
 		JFactory::getDocument()->setMimeEncoding( 'application/json' );
 		JResponse::setHeader('Content-Disposition','attachment;filename="progress-report-results.json"');
 		echo "{'ok'='".$ok."','mensagens=[".$mensagens."]'}";
-		JFactory::getApplication()->close(); // or jexit();
+		JFactory::getApplication()->close(); // || jexit();
 	}
 	
 	public function removeRedeSocial(){
@@ -1063,7 +1063,7 @@ class AngelgirlsController extends JControllerLegacy {
 		JFactory::getDocument()->setMimeEncoding( 'application/json' );
 		JResponse::setHeader('Content-Disposition','attachment;filename="progress-report-results.json"');
 		echo "{'ok'='".$ok."','mensagens=[".$mensagens."]'}";
-		JFactory::getApplication()->close(); // or jexit();
+		JFactory::getApplication()->close(); // || jexit();
 	}
 	
 	public function removeEndereco(){
@@ -1102,7 +1102,7 @@ class AngelgirlsController extends JControllerLegacy {
 		JFactory::getDocument()->setMimeEncoding( 'application/json' );
 		JResponse::setHeader('Content-Disposition','attachment;filename="progress-report-results.json"');
 		echo "{'ok'='".$ok."','mensagens=[".$mensagens."]'}";
-		JFactory::getApplication()->close(); // or jexit();
+		JFactory::getApplication()->close(); // || jexit();
 	}
 	
 	public function removeTelefone(){
@@ -1141,7 +1141,7 @@ class AngelgirlsController extends JControllerLegacy {
 		JFactory::getDocument()->setMimeEncoding( 'application/json' );
 		JResponse::setHeader('Content-Disposition','attachment;filename="progress-report-results.json"');
 		echo "{'ok'='".$ok."','mensagens=[".$mensagens."]'}";
-		JFactory::getApplication()->close(); // or jexit();
+		JFactory::getApplication()->close(); // || jexit();
 	}
 	
 	/**
