@@ -23,7 +23,10 @@
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../../main/php/</directory>
+            <directory suffix=".php">../components/com_momoseo</directory>
+            <directory suffix=".php">../modules/mod_sugestoes_dicas</directory>
+            <directory suffix=".php">../modules/mod_sugestoes_dicas</directory>
+            <directory suffix=".php">../plugins/plg_momoseo</directory>
         </whitelist>
     </filter>
     <php>

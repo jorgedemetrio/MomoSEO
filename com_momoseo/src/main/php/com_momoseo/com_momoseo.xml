@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.2" method="upgrade">
-	<name>COM_ANGELGIRLS</name>
-	<creationDate>September 01, 2015</creationDate>
+	<name>COM_MOMOSEO</name>
+	<creationDate>September 01, 2017</creationDate>
 	<author>Jorge Demetrio</author>
 	<authorEmail>jorge.demetrio@alldreams.com.br</authorEmail>
-	<authorUrl>www.angelgirls.com.br</authorUrl>
+	<authorUrl>www.alldreams.com.br</authorUrl>
 	<copyright>Copyright (C) 2015. All Rights Reserved</copyright>
-	<license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
-	<version>1.0.0</version>
+	<license>GNU/GPL Version 3 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
+	<version>{VERSAO}</version>
 	<description><![CDATA[
-		<h1>Angel Girls (v.1.0.0)</h1>
+		<h1>Momo SEO ({VERSAO})</h1>
 		<div style="clear: both;"></div>
-		<p>Componente de gestor de galerias.. <strong>Built for Joomla 3.2.</strong></p>
-		<p>Created by <a href="http://www.angelgirls.com.br" target="_blank">Jorge Demetrio | www.angelgirls.com.br</a>
+		<p>Componente de SEO para integrar.. <strong>Built for Joomla 3.8.</strong></p>
+		<p>Created by <a href="http://www.alldreams.com.br" target="_blank">Jorge Demetrio | www.alldreams.com.br</a>
 	]]></description>
 
 	<!-- Runs on install/uninstall/update; New in Joomla 2.5 -->
@@ -42,25 +42,16 @@
     </uninstall>
 	
 	<updateservers>
-		<server type="extension" name="Sigestões &amp; Dicas" priority="1">http://updates.alldreams.com/com_momoseo.xml</server>
+		<server type="extension" name="Sigestães &amp; Dicas" priority="1">http://updates.alldreams.com/com_momoseo.xml</server>
 	</updateservers>
 	
 	<administration>
-		<menu img="components/com_angelgirls/assets/images/icons/angelgirls-16x16.png">COM_ANGELGIRLS_MENU</menu>
+		<menu img="components/com_momoseo/assets/images/icons/com_momoseo-16x16.png">COM_MOMOSEO_MENU</menu>
 		<submenu>
 			<!-- Instead of link you can specify individual link attributes -->
-			<menu option="com_angelgirls" view="galerias">COM_ANGELGIRLS_MENU_GALERIAS</menu>
-			<menu option="com_angelgirls" view="fotos">COM_ANGELGIRLS_MENU_FOTOS</menu>
-			<menu option="com_angelgirls" view="agendas">COM_ANGELGIRLS_MENU_AGENDAS</menu>
-			<menu option="com_angelgirls" view="modelos">COM_ANGELGIRLS_MENU_MODELOS</menu>
-			<menu option="com_angelgirls" view="fotografos">COM_ANGELGIRLS_MENU_FOTOGRAFOS</menu>
-			<menu option="com_angelgirls" view="equipes">COM_ANGELGIRLS_MENU_EQUIPES</menu>
-			<menu option="com_angelgirls" view="locacoes">COM_ANGELGIRLS_MENU_LOCACOES</menu>
-			<menu option="com_angelgirls" view="produtos">COM_ANGELGIRLS_MENU_PRODUTOS</menu>
-			<menu option="com_angelgirls" view="dadoscomplementares">COM_ANGELGIRLS_MENU_DADOSCOMPLEMENTARES</menu>
-			<menu option="com_angelgirls" view="temas">COM_ANGELGIRLS_MENU_TEMAS</menu>
-			<menu option="com_angelgirls" view="concursos">COM_ANGELGIRLS_MENU_CONCURSOS</menu>
-			<menu link="option=com_categories&amp;extension=com_angelgirls">COM_ANGELGIRLS_MENU_MENU_CATEGORIES</menu>
+			<menu option="com_momoseo" view="galerias">COM_MOMOSEO_LINKS</menu>
+			<menu link="option=com_momoseo&amp;task=crow">COM_MOMOSEO_CROW</menu>
+			<menu link="option=com_momoseo&amp;task=sitemaps">COM_MOMOSEO_SITEMAP</menu>
 		</submenu>
 		<files folder="admin">
 			<filename>access.xml</filename>

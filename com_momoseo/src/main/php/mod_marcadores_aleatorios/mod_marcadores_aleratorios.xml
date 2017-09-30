@@ -2,7 +2,7 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
 	<name>Momo SEO - Marcadores Aleatórios</name>
 	<author>Jorge Demetrio</author>
-	<version>1.0.0</version>
+	<version>{VERSAO}</version>
 	<description>Módulo que nuvem de palavras.</description>
 	<files>
 		<filename>mod_marcadores_aleratorios.xml</filename>

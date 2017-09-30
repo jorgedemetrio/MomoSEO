@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>jorge.demetrio@alldreams.com.br</authorEmail>
 	<authorUrl>www.alldreams.org</authorUrl>
-	<version>1.0.0</version>
+	<version>{VERSAO}</version>
 	<description>PLG_SEARCH_CATEGORIES_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="categories">categories.php</filename>
