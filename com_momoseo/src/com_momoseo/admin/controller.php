@@ -11,7 +11,7 @@
  */
 
 // No direct access to this file
-defined ( '_JEXEC' ) or die ( 'Restricted access' );
+defined ( '_JEXEC' ) || die ( 'Restricted access' );
 
 // import Joomla controller library
 jimport ( 'joomla.application.component.controller' );
@@ -256,7 +256,7 @@ class AngelgirlsController extends JControllerLegacy {
 	}
 	
 	/**
-	 * Só carrrega a tela de adição.
+	 * Sï¿½ carrrega a tela de adiï¿½ï¿½o.
 	 */
 	public function addModelo() {
 		$user = & JFactory::getUser ();
@@ -356,7 +356,7 @@ class AngelgirlsController extends JControllerLegacy {
 			$query->update ( $db->quoteName ( '#__angelgirls_modelo' ) )->set ( array (
 					$db->quoteName ( 'data_alterado' ) . ' = NOW() ',
 					$db->quoteName ( 'id_usuario_alterador' ) . ' = ' . $user->id,
-					$db->quoteName ( 'id_usuario' ) . ' = ' . $user->id,//TODO Pegar o ID DO USUÁRIO SALVO
+					$db->quoteName ( 'id_usuario' ) . ' = ' . $user->id,//TODO Pegar o ID DO USUï¿½RIO SALVO
 					$db->quoteName ( 'nome_artistico' ) . ' = ' . $db->quote($nomeArtistico),
 					$db->quoteName ( 'descricao' ) . ' = ' . $db->quote($descricao),
 					$db->quoteName ( 'meta_descricao' ) . ' = ' . $db->quote($metaDescricao),
@@ -606,7 +606,7 @@ class AngelgirlsController extends JControllerLegacy {
 		
 		$db = JFactory::getDbo ();
 
-		// E-mail não pode estar cadastrado em outro usuário.
+		// E-mail nï¿½o pode estar cadastrado em outro usuï¿½rio.
 		$query = $db->getQuery ( true );
 		$query->select ( $db->quoteName (array('a.id_usuario')))
 						->from ( $db->quoteName ( '#__angelgirls_email', 'a' ))
@@ -615,7 +615,7 @@ class AngelgirlsController extends JControllerLegacy {
 		$db->setQuery ( $query );
 		$results = $db->loadObject();
 		if(sizeof($results)>0){
-			$mensagens=$mensagens.'"E-mail já cadastrado em outra conta [ID USUARIO: ' . $results->id_usuario. '].",';
+			$mensagens=$mensagens.'"E-mail jï¿½ cadastrado em outra conta [ID USUARIO: ' . $results->id_usuario. '].",';
 		}
 		
 		$query = $db->getQuery ( true );
@@ -627,11 +627,11 @@ class AngelgirlsController extends JControllerLegacy {
 		$db->setQuery ( $query );
 		$results = $db->loadObjectList ();
 		if(sizeof($results)<=0){
-			$mensagens=$mensagens.'"Esse ID de e-mail não pertence ao usuário.",';
+			$mensagens=$mensagens.'"Esse ID de e-mail nï¿½o pertence ao usuï¿½rio.",';
 		}
 		
 		if(strpos($email, "@") === false || strpos($email, ".", strpos($email, "@")) === false){
-			$mensagens=$mensagens.'"E-mail não é valido.",';
+			$mensagens=$mensagens.'"E-mail nï¿½o ï¿½ valido.",';
 		}
 		
 		if($mensagens == ''){
@@ -1001,7 +1001,7 @@ class AngelgirlsController extends JControllerLegacy {
 		
 
 		if($id == 0){
-			$mensagens=$mensagens.'"Esse ID de e-mail não pertence ao usuário.",';
+			$mensagens=$mensagens.'"Esse ID de e-mail nï¿½o pertence ao usuï¿½rio.",';
 		}
 		
 
@@ -1040,7 +1040,7 @@ class AngelgirlsController extends JControllerLegacy {
 		
 		
 		if($id == 0){
-			$mensagens=$mensagens.'"Esse ID de rede social não pertence ao usuário.",';
+			$mensagens=$mensagens.'"Esse ID de rede social nï¿½o pertence ao usuï¿½rio.",';
 		}
 		
 		
@@ -1079,7 +1079,7 @@ class AngelgirlsController extends JControllerLegacy {
 		
 		
 		if($id == 0){
-			$mensagens=$mensagens.'"Esse ID de Endereco não pertence ao usuário.",';
+			$mensagens=$mensagens.'"Esse ID de Endereco nï¿½o pertence ao usuï¿½rio.",';
 		}
 		
 		
@@ -1118,7 +1118,7 @@ class AngelgirlsController extends JControllerLegacy {
 		
 		
 		if($id == 0){
-			$mensagens=$mensagens.'"Esse ID de telefone não pertence ao usuário.",';
+			$mensagens=$mensagens.'"Esse ID de telefone nï¿½o pertence ao usuï¿½rio.",';
 		}
 		
 		
@@ -1203,7 +1203,7 @@ class AngelgirlsController extends JControllerLegacy {
 	}
 	
 	/**
-	 * Só carrrega a tela de adição.
+	 * Sï¿½ carrrega a tela de adiï¿½ï¿½o.
 	 */
 	public function addTema() {
 		$user = & JFactory::getUser ();
@@ -1424,7 +1424,7 @@ class AngelgirlsController extends JControllerLegacy {
 	}
 	
 	/**
-	 * Só carrrega a tela de adição.
+	 * Sï¿½ carrrega a tela de adiï¿½ï¿½o.
 	 */
 	public function addAgenda() {
 		$user = & JFactory::getUser ();

@@ -42,7 +42,7 @@ abstract class AngelgirlsHelper
 		$document = JFactory::getDocument();
 		if ($submenu == 'categories'){
 			$document->setTitle(JText::_('Categories - Angelgirls'));
-		};
+		}
 	}
 
 	/**
@@ -59,13 +59,13 @@ abstract class AngelgirlsHelper
 			$assetName = 'com_angelgirls';
 		} else {
 			$assetName = 'com_angelgirls.message.'.(int) $Id;
-		};
+		}
 
 		$actions = JAccess::getActions('com_angelgirls', 'component');
 
 		foreach ($actions as $action){
 			$result->set($action->name, $user->authorise($action->name, $assetName));
-		};
+		}
 
 		return $result;
 	}

@@ -14,12 +14,12 @@ defined('_JEXEC') or die('Restricted access');
 // Added for Joomla 3.0
 if(!defined('DS')){
 	define('DS',DIRECTORY_SEPARATOR);
-};
+}
 
 // Access check.
 if (!JFactory::getUser()->authorise('core.manage', 'com_angelgirls')){
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
-};
+}
 
 // Load cms libraries
 JLoader::registerPrefix('J', JPATH_PLATFORM . '/cms');

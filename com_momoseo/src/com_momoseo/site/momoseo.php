@@ -17,7 +17,7 @@ defined('_JEXEC') or die('Restricted access');
 // Added for Joomla 3.0
 if(!defined('DS')){
 	define('DS',DIRECTORY_SEPARATOR);
-};
+}
 
 if(!defined('VERSAO_ANGELGIRLS')){
 	define('VERSAO_ANGELGIRLS','1.0');
@@ -71,7 +71,7 @@ if($exibirPopup==null || !$exibirPopup){
 				var sa = document.createElement('script'); sa.type = 'text/javascript'; sa.async = true;
 				sa.src = '//c2.popads.net/pop.js';
 				s.parentNode.insertBefore(sa, s);
-			};
+			}
 			s.parentNode.insertBefore(pa, s);
 		})();");
 	setcookie("popads","1",(time()+(60*60*24*7)));//Uma semana
