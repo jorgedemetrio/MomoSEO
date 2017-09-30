@@ -19,7 +19,7 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function installTest($parent)
+	function testInstall($parent)
 	{
 		$this->object->install('a');
 	}
@@ -29,7 +29,7 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function uninstallTest($parent)
+	function testUninstall($parent)
 	{
 		$this->object->uninstall('a');
 	}
@@ -39,7 +39,7 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function updateTest($parent)
+	function testUpdate($parent)
 	{
 		$this->object->update('a');
 	}
@@ -49,7 +49,7 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function preflightTest($type, $parent)
+	function testPreflight($type, $parent)
 	{
 		$this->object->preflight('a');
 	}
@@ -59,7 +59,7 @@ class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	function postflightTest($type, $parent)
+	function testPostflight($type, $parent)
 	{
 		$this->object->postflight('a');
 	}
