@@ -2,7 +2,7 @@
 #require_once ‘PHPUnit/Framework.php’;
 //inclui o framework do phpunit
 
-require_once diname(__FILE__).'../../../com_momoseo/script.php';
+#require_once diname(__FILE__).'../../../com_momoseo/script.php';
 
 // indica o arquivo de classe a ser testado
 class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
