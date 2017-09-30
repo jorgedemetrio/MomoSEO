@@ -3,6 +3,7 @@
 define('_JEXEC','S');
 
 
+class JControllerLegacy{}
 
 function jimport($lib){
 		

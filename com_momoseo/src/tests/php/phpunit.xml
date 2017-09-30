@@ -12,7 +12,7 @@
      stopOnFailure="false">>
     <testsuites>
         <testsuite name="Momo SEO">
-            <directory>.</directory>
+            <directory suffix=".php">.</directory>
         </testsuite>
     </testsuites>
     <logging>
@@ -22,8 +22,8 @@
     </logging>
 
     <filter>
-        <whitelist>
-            <directory suffix=".php">../../../main/php/</directory>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../../main/php/</directory>
         </whitelist>
     </filter>
     <php>
