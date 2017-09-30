@@ -1,5 +1,5 @@
 <?php
-require_once ‘PHPUnit/Framework.php’;
+#require_once ‘PHPUnit/Framework.php’;
 //inclui o framework do phpunit
 
 require_once diname(__FILE__).'../../../com_momoseo/script.php';
