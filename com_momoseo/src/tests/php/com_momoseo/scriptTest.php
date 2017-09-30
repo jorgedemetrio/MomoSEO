@@ -3,6 +3,7 @@
 //inclui o framework do phpunit
 
 require_once dirname(__FILE__).'/../../../main/php/com_momoseo/script.php';
+define('JPATH_COMPONENT',JOOMLA_ADMIN_PATH.'/components/com_momoseo');
 
 // indica o arquivo de classe a ser testado
 class com_momoseoInstallerScriptTest extends PHPUnit_Framework_TestCase
