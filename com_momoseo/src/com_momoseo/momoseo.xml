@@ -41,6 +41,10 @@
         </sql>
     </uninstall>
 	
+	<updateservers>
+		<server type="extension" name="Sigestões &amp; Dicas" priority="1">http://updates.alldreams.com/com_momoseo.xml</server>
+	</updateservers>
+	
 	<administration>
 		<menu img="components/com_angelgirls/assets/images/icons/angelgirls-16x16.png">COM_ANGELGIRLS_MENU</menu>
 		<submenu>
