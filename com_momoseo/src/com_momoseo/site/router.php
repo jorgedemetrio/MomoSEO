@@ -14,7 +14,7 @@ defined('_JEXEC') || die('Restricted access');
 
 
 
-function AngelgirlsBuildRoute(&$query)
+function MomoseoBuildRoute(&$query)
 {
 
 
@@ -34,7 +34,7 @@ function AngelgirlsBuildRoute(&$query)
 	return $segments;
 }
 
-function AngelgirlsParseRoute($segments)
+function MomoseoParseRoute($segments)
 {
 	$vars = array();
 	if(!(strpos($segments[0],'mm:')===false)){
