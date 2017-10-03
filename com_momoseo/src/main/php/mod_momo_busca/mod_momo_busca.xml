@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+	<name>Momo SEO - Busca</name>
+	<author>Jorge Demetrio</author>
+	<version>1.0.0</version>
+	<description>Módulo De busca</description>
+
+
+
+	<files>
+		<filename>mod_momo_busca.xml</filename>
+		<filename module="mod_momo_busca">mod_momo_busca.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<filename>tmpl/default.php</filename>
+		<filename>tmpl/index.html</filename>
+	</files>
+
+	<fields name="params">
+		<fieldset name="basic">
+			<field name="adSenseId" type="text" default="partner-pub-2442632731348664:3010243382" label="ID ADSENSE PARTNER"/>
+			<field name="lblBotaoBusca" type="text" default="Buscar" label="Nome do botão de busca"/>
+			<field name="lblClass" type="text" default="mod-custom__search-block" label="Class"/>
+			<field name="lblImagem" type="media" label="Imagem"/>
+		</fieldset>
+	</fields>
+
+
+	<updateservers>
+		<server type="extension" name="Sigestões &amp; Dicas" priority="1">
+			http://updates.alldreams.com/momoseo/mod_momo_busca.xml</server>
+	</updateservers>
+	<config>
+	</config>
+</extension>

@@ -73,29 +73,38 @@ class MomoseoController extends JControllerLegacy{
 		echo($xml);
 		exit();
 	}
+	
+	public function buscar(){
+		$q = JRequesy::getVar('q');
+		
 
-      public function sitemapTag(){
-                $db = JFactory::getDbo ();
-                $query = $db->getQuery ( true );
-                $query->select("`id` , path ")
-                ->from ('#__tags')
+		JRequest::setVar ( 'view', 'busca' );
+		JRequest::setVar ( 'layout', 'default' );
+		parent::display (true, false);
+	}
+
+    public function sitemapTag(){
+            $db = JFactory::getDbo ();
+            $query = $db->getQuery ( true );
+            $query->select("`id` , path ")
+            ->from ('#__tags')
                                 ->order('published DESC')
                                 ->setLimit(50000);
-                $db->setQuery ( $query );
-                $results = $db->loadObjectList(); 
-                $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
-                foreach ( $results as $result){ 
+            $db->setQuery ( $query );
+            $results = $db->loadObjectList(); 
+            $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+            foreach ( $results as $result){ 
                         $url = $_SERVER['HTTP_HOST'].'/component/tags/tag/' . $result->id  . '-' . $result->path  . '.html';
                         $xml = $xml . "\t<url>\n"; 
                         $xml = $xml . "\t\t<changefreq>monthly</changefreq>\n"; 
                         $xml = $xml . "\t\t<priority>0.3</priority>\n";
                         $xml = $xml . "\t\t<loc>http://" .  $url . "</loc>\n";
                         $xml = $xml . "\t</url>\n";
-                }
-                $xml = $xml . '</urlset>';
-                header('Content-type: application/xml');
-                echo($xml);
-                exit();
+            }
+            $xml = $xml . '</urlset>';
+            header('Content-type: application/xml');
+            echo($xml);
+            exit();
         }
 	
 	/**
