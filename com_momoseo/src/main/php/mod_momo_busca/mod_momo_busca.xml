@@ -29,7 +29,7 @@
 
 
 	<updateservers>
-		<server type="extension" name="mod_momo_busca" priority="1">http://updates.alldreams.com/momoseo/mod_momo_busca.xml</server>
+		<server type="extension" name="mod_momo_busca" priority="1">http://updates.alldreams.com/mod_momo_busca.xml</server>
 	</updateservers>
 	<config>
 	</config>

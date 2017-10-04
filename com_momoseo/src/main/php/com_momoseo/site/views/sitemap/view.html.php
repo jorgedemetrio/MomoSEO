@@ -1,11 +1,11 @@
 <?php
 /*------------------------------------------------------------------------
-# view.html.php - Angel Girls Component
+# view.html.php - MomoSEO Component
 # ------------------------------------------------------------------------
 # author    Jorge Demetrio
 # copyright Copyright (C) 2015. All Rights Reserved
-# license   GNU/GPL Version 2 || later - http://www.gnu.org/licenses/gpl-2.0.html
-# website   www.angelgirls.com.br
+# license   GNU/GPL Version 3 || later - http://www.gnu.org/licenses/gpl-3.0.html
+# website   www.alldreams.com.br
 -------------------------------------------------------------------------*/
 
 // No direct access to this file
@@ -17,7 +17,7 @@ jimport('joomla.application.component.view');
 /**
  * Temas View
  */
-class AngelgirlsViewmodelo extends JViewLegacy
+class MomoseoViewsitemap extends JViewLegacy
 {
 	/**
 	 * Temas view display method
@@ -47,23 +47,14 @@ class AngelgirlsViewmodelo extends JViewLegacy
 	 */
 	protected function addToolBar() 
 	{
-			
-
-		$layout = JRequest::getVar('layout');
 		$document = JFactory::getDocument();
 		$pathway = JFactory::getApplication()->getPathway();
-
-
-		$document->setMetadata('APPLICATION-NAME','Angel Girls');
-		
-
-		$objeto = JRequest::getVar('usuario');
-		$descricao = 'Modelo ' . $objeto->nome;
+		$document->setMetadata('APPLICATION-NAME','MomoSEO Sitemap');
+		$descricao = 'Sitemap '.$document->getTitle();
 		$pathway->addItem($descricao,'');
 		$document->setTitle($descricao );
-		$document->setDescription($objeto->meta_descricao);
-		$document->setMetadata('Keywords', 'modelo,'.$objeto->nome.','.str_replace(' ', ',',$objeto->nome));
-
+		$document->setDescription($descricao);
+		$document->setMetadata('Keywords', 'sitemap');
 	}
 
 	/**
@@ -74,8 +65,6 @@ class AngelgirlsViewmodelo extends JViewLegacy
 	 */
 	protected function setDocument() 
 	{
-		$document = JFactory::getDocument();
-		//$document->setTitle(JText::_('Angelgirls Manager - Administrator'));
 	}
 }
 ?>

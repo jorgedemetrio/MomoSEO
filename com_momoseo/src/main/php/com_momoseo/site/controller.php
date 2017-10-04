@@ -1,11 +1,11 @@
 <?php
 
 /*------------------------------------------------------------------------
-# controller.php - Angel Girls Component
+# controller.php - MomoSEO Component
 # ------------------------------------------------------------------------
 # author    Jorge Demetrio
 # copyright Copyright (C) 2015. All Rights Reserved
-# license   GNU/GPL Version 2 || later - http://www.gnu.org/licenses/gpl-2.0.html
+# license   GNU/GPL Version 3 || later - http://www.gnu.org/licenses/gpl-2.0.html
 # website   www.alldreams.com.br
 -------------------------------------------------------------------------*/
 // No direct access to this file
@@ -25,13 +25,13 @@ jimport('joomla.log.log');
 
 
 /**
- * Angelgirls Component Controller
+ * MomoSEO Component Controller
  */
 class MomoseoController extends JControllerLegacy{
 	
 	function display($cachable = false, $urlparams = false) {
 		// set default view if not set
-		JRequest::setVar ( 'view', JRequest::getCmd ( 'view', 'Angelgirls' ) );
+		JRequest::setVar ( 'view', JRequest::getCmd ( 'view', 'Momoseo' ) );
 
 		// call parent behavior
 		parent::display ( $cachable );
@@ -122,7 +122,9 @@ class MomoseoController extends JControllerLegacy{
 		exit();
 	}
 	
-	
+	/**
+	 * Carrega a tela de bsuca
+	 */
 	public function buscar(){
 		$q = JRequesy::getVar('q');
 	

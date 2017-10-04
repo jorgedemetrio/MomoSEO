@@ -22,7 +22,7 @@
 		<filename>controller.php</filename>
 		<filename>index.html</filename>
 		<filename>router.php</filename>
-		<filename>angelgirls.php</filename>
+		<filename>momoseo.php</filename>
 		<folder>assets</folder>
 		<folder>helpers</folder>
 		<folder>models</folder>
@@ -58,7 +58,7 @@
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
 			<filename>index.html</filename>
-			<filename>angelgirls.php</filename>
+			<filename>momoseo.php</filename>
 			<folder>assets</folder>
 			<folder>controllers</folder>
 			<folder>helpers</folder>
@@ -67,8 +67,8 @@
 		</files>
 
 		<languages folder="admin">
-			<language tag="en-GB">language/en-GB/en-GB.com_angelgirls.ini</language>
-			<language tag="en-GB">language/en-GB/en-GB.com_angelgirls.sys.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.com_momoseo.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.com_momoseo.sys.ini</language>
 		</languages>
 
 	</administration>

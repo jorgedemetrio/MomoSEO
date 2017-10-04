@@ -3,12 +3,7 @@
 // Check to ensure this file is included in Joomla!
 defined ( '_JEXEC' ) || die ( 'Restricted access' );
 
-
-
 $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::getVar ( 'Itemid' ), false);
-
-
-//$urlFoto = JRoute::_('index.php?option=com_angelgirls&view=modelo&task=loadImage&id='.$conteudo->token.':thumb');
 ?>
 <form action="<?php echo $url;?>" id="cse-search-box">
   <div>
