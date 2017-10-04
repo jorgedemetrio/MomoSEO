@@ -37,7 +37,7 @@ function MomoseoBuildRoute(&$query)
 function MomoseoParseRoute($segments)
 {
 	$vars = array();
-	if(!(strpos($segments[0],'mm:')===false)){
+	if(!(strpos($segments[0],'mm')===false)){
 		$vars['task'] = substr($segments[0],3);
 		$valor = array();
 		foreach($segments as $val){

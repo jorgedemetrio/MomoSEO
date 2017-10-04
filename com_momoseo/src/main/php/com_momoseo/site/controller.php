@@ -74,14 +74,7 @@ class MomoseoController extends JControllerLegacy{
 		exit();
 	}
 	
-	public function buscar(){
-		$q = JRequesy::getVar('q');
-		
 
-		JRequest::setVar ( 'view', 'busca' );
-		JRequest::setVar ( 'layout', 'default' );
-		parent::display (true, false);
-	}
 
     public function sitemapTag(){
             $db = JFactory::getDbo ();
@@ -130,7 +123,14 @@ class MomoseoController extends JControllerLegacy{
 	}
 	
 	
-
+	public function buscar(){
+		$q = JRequesy::getVar('q');
+	
+	
+		JRequest::setVar ( 'view', 'busca' );
+		JRequest::setVar ( 'layout', 'default' );
+		parent::display (true, false);
+	}
 
 
 }

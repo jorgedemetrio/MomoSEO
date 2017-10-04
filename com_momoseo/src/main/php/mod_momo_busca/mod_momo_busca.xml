@@ -18,7 +18,9 @@
 
 	<fields name="params">
 		<fieldset name="basic">
-			<field name="adSenseId" type="text" default="partner-pub-2442632731348664:3010243382" label="ID ADSENSE PARTNER"/>
+			<field name="cx" type="text" default="partner-pub-2442632731348664:3010243382" label="ID ADSENSE PARTNER"/>
+			<field name="cof" type="text" default="FORID:10" label="cof"/>
+			
 			<field name="lblBotaoBusca" type="text" default="Buscar" label="Nome do botão de busca"/>
 			<field name="lblClass" type="text" default="mod-custom__search-block" label="Class"/>
 			<field name="lblImagem" type="media" label="Imagem"/>
@@ -27,8 +29,7 @@
 
 
 	<updateservers>
-		<server type="extension" name="Sigestões &amp; Dicas" priority="1">
-			http://updates.alldreams.com/momoseo/mod_momo_busca.xml</server>
+		<server type="extension" name="mod_momo_busca" priority="1">http://updates.alldreams.com/momoseo/mod_momo_busca.xml</server>
 	</updateservers>
 	<config>
 	</config>
