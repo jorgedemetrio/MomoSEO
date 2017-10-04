@@ -11,7 +11,6 @@
 		<filename>mod_momo_busca.xml</filename>
 		<filename module="mod_momo_busca">mod_momo_busca.php</filename>
 		<filename>index.html</filename>
-		<filename>helper.php</filename>
 		<filename>tmpl/default.php</filename>
 		<filename>tmpl/index.html</filename>
 	</files>
