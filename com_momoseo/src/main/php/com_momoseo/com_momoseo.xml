@@ -23,9 +23,8 @@
 		<filename>index.html</filename>
 		<filename>router.php</filename>
 		<filename>momoseo.php</filename>
-		<folder>assets</folder>
+		<folder>icones</folder>
 		<folder>helpers</folder>
-		<folder>models</folder>
 		<folder>views</folder>
 	</files>
     
@@ -64,6 +63,7 @@
 			<folder>helpers</folder>
 			<folder>models</folder>
 			<folder>views</folder>
+			<folder>language</folder>
 		</files>
 
 		<languages folder="admin">
