@@ -28,17 +28,17 @@
 		<folder>views</folder>
 	</files>
     
-	<install>
-        <sql>
-            <file charset="utf8" driver="mysql">install/installsql.mysql.utf8.sql</file>
-        </sql>
-    </install>
+<!-- 	<install> -->
+<!--         <sql> -->
+<!--             <file charset="utf8" driver="mysql">install/installsql.mysql.utf8.sql</file> -->
+<!--         </sql> -->
+<!--     </install> -->
 
-    <uninstall>
-        <sql>
-            <file charset="utf8" driver="mysql">install/uninstallsql.mysql.utf8.sql</file>
-        </sql>
-    </uninstall>
+<!--     <uninstall> -->
+<!--         <sql> -->
+<!--             <file charset="utf8" driver="mysql">install/uninstallsql.mysql.utf8.sql</file> -->
+<!--         </sql> -->
+<!--     </uninstall> -->
 	
 	<updateservers>
 		<server type="extension" name="Sigestães &amp; Dicas" priority="1">http://updates.alldreams.com/com_momoseo.xml</server>
