@@ -17,9 +17,9 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
 		}
 		else{ 
 			echo ' type="submit" ';
-		}?>value="<?php echo JText::_('');?>" />
+		}?>value="<?php echo $_GET["sa"];?>" />
   </div>
-</form>
+</form>sa
     
 
 <div id="cse-search-results"></div>
