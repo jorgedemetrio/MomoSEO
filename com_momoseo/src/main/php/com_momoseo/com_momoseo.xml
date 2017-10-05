@@ -46,11 +46,11 @@
 	
 	<administration>
 		<menu img="components/com_momoseo/assets/images/icons/com_momoseo-16x16.png">COM_MOMOSEO_MENU</menu>
-<!-- 		<submenu> -->
-<!-- 			<menu option="com_momoseo" view="galerias">COM_MOMOSEO_LINKS</menu> -->
+		<submenu>
+			<menu option="com_momoseo" view="sitemaps">COM_MOMOSEO_SITEMAP</menu>
 <!-- 			<menu link="option=com_momoseo&amp;task=crow">COM_MOMOSEO_CROW</menu> -->
 <!-- 			<menu link="option=com_momoseo&amp;task=sitemaps">COM_MOMOSEO_SITEMAP</menu> -->
-<!-- 		</submenu> -->
+		</submenu>
 		<files folder="admin">
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>

@@ -47,14 +47,7 @@ class MomoseoViewsitemap extends JViewLegacy
 	 */
 	protected function addToolBar() 
 	{
-		$document = JFactory::getDocument();
-		$pathway = JFactory::getApplication()->getPathway();
-		$document->setMetadata('APPLICATION-NAME','MomoSEO Sitemap');
-		$descricao = 'Sitemap '.$document->getTitle();
-		$pathway->addItem($descricao,'');
-		$document->setTitle($descricao );
-		$document->setDescription($descricao);
-		$document->setMetadata('Keywords', 'sitemap');
+
 	}
 
 	/**
