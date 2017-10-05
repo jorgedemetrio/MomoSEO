@@ -57,6 +57,7 @@
 			<filename>controller.php</filename>
 			<filename>index.html</filename>
 			<filename>momoseo.php</filename>
+			<folder>install</folder>
 			<folder>assets</folder>
 			<folder>controllers</folder>
 			<folder>helpers</folder>
