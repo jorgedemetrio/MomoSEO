@@ -10,6 +10,7 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
 
 <form action="<?php echo $url;?>" id="cse-search-box">
   <div>
+    <input type="hidden" name="lang" value="<?php echo $lang;?>" />
     <input type="hidden" name="cx" value="<?php echo $cx;?>" />
     <input type="hidden" name="cof" value="<?php echo $cof;?>" />
     <input type="hidden" name="ie" value="UTF-8" />
@@ -23,4 +24,5 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
 		}?>value="<?php echo $lblBotaoBusca; ?>" />
   </div>
 </form>
+<script type="text/javascript" src="http://www.google.com.br/coop/cse/brand?form=cse-search-box&amp;lang=<?php echo $lang;?>"></script>
 </div>

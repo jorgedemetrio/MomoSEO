@@ -9,6 +9,6 @@ $lblBotaoBusca = $params->get('lblBusca', 'Busca');
 $lblImagem = $params->get('lblImagem');
 $lblClass = $params->get('lblClass', '');
 $cof = $params->get('cof', 'FORID:10');
-
+$lang = $params->get('lang', 'en');
 
 require JModuleHelper::getLayoutPath('mod_momo_busca');

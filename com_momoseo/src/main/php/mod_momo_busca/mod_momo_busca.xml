@@ -29,11 +29,12 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="cx" type="text" default="partner-pub-2442632731348664:3010243382" label="JMOD_MOMOSEO_CX" />
-				<field name="cof" type="text" default="FORID:10" label="JMOD_MOMOSEO_COF" />
-				<field name="lblClass" type="text" default="mod-custom__search-block" label="JMOD_MOMOSEO_CLASS" />
-				<field name="lblBusca" type="text" default="Busca" label="JMOD_MOMOSEO_BUSCAR" />
+				<field name="cx" type="text" default="" label="JMOD_MOMOSEO_CX" />
+				<field name="cof" type="text" default="" label="JMOD_MOMOSEO_COF" />
+				<field name="lblClass" type="text" default="" label="JMOD_MOMOSEO_CLASS" />
+				<field name="lblBusca" type="text" default="Search" label="JMOD_MOMOSEO_BUSCAR" />
 				<field name="lblImagem" type="media" label="JMOD_MOMOSEO_IMAGE" />
+				<field name="lang" type="text" default="en" label="JMOD_MOMOSEO_IMAGE" />
 			</fieldset>
 		</fields>
 	</config>

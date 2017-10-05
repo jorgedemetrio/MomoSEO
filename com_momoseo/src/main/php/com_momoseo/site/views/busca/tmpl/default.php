@@ -7,6 +7,7 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
 ?>
 <form action="<?php echo $url;?>" id="cse-search-box">
   <div>
+    <input type="hidden" name="lang" value="<?php echo JRequest::get("lang");?>" />
     <input type="hidden" name="cx" value="<?php echo JRequest::get("cx");?>"/>
     <input type="hidden" name="cof" value="<?php echo JRequest::get("cof");?>"/>
     <input type="hidden" name="ie" value="UTF-8" />
@@ -19,7 +20,8 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
 			echo ' type="submit" ';
 		}?>value="<?php echo $_GET["sa"];?>" />
   </div>
-</form>sa
+</form>
+<script type="text/javascript" src="http://www.google.com.br/coop/cse/brand?form=cse-search-box&amp;lang=<?php echo JRequest::get("lang");?>"></script>
     
 
 <div id="cse-search-results"></div>
