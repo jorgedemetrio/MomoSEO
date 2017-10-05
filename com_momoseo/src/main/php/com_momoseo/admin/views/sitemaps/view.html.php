@@ -17,7 +17,7 @@ jimport('joomla.application.component.view');
 /**
  * Temas View
  */
-class MomoseoViewsitemap extends JViewLegacy
+class momoseoViewsitemaps extends JViewLegacy
 {
 	/**
 	 * Temas view display method
