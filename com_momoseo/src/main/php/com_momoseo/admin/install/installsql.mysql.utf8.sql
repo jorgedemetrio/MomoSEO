@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `#__mom_dyna_page` (
 	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 	`url` varchar(255) NOT NULL UNIQUE,
 	`data_alteracao` datetime NOT NULL,
-	`prioridade` NUMERIC(1,2) NOT NULL DEFAULT 0.2,
+	`prioridade` decimal(1,2) NOT NULL DEFAULT 0.2,
 	`tipo` varchar(4) DEFAULT 'PAGE'
 ) ENGINE = InnoDB   DEFAULT CHARSET=utf8;
 
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `#__mom_crow_page` (
 	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 	`url` varchar(255) NOT NULL UNIQUE,
 	`data_alteracao` datetime NOT NULL,
-	`prioridade` NUMERIC(1,2) NOT NULL DEFAULT 0.2
+	`prioridade` decimal(1,2) NOT NULL DEFAULT 0.2
 ) ENGINE = InnoDB   DEFAULT CHARSET=utf8;
 
 
