@@ -1,11 +1,11 @@
 <?php
 /*------------------------------------------------------------------------
-# angelgirls.php - Angel Girls Component
+# momoseo.php - Momo SEO Component
 # ------------------------------------------------------------------------
 # author    Jorge Demetrio
 # copyright Copyright (C) 2015. All Rights Reserved
-# license   GNU/GPL Version 2 || later - http://www.gnu.org/licenses/gpl-2.0.html
-# website   www.angelgirls.com.br
+# license   GNU/GPL Version 3 || later - http://www.gnu.org/licenses/gpl-3.0.html
+# website   www.AllDreams.com.br
 -------------------------------------------------------------------------*/
 
 // No direct access to this file
@@ -17,7 +17,7 @@ if(!defined('DS')){
 }
 
 // Access check.
-if (!JFactory::getUser()->authorise('core.manage', 'com_angelgirls')){
+if (!JFactory::getUser()->authorise('core.manage', 'com_momoseo')){
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
@@ -27,40 +27,18 @@ JLoader::registerPrefix('J', JPATH_PLATFORM . '/cms');
 JLoader::registerPrefix('J', JPATH_PLATFORM . '/joomla',false);
 
 // require helper files
-JLoader::register('AngelgirlsHelper', dirname(__FILE__) . DS . 'helpers' . DS . 'angelgirls.php');
+JLoader::register('MomoseoHelper', dirname(__FILE__) . DS . 'helpers' . DS . 'momoseo.php');
 
 // import joomla controller library
 jimport('joomla.application.component.controller');
 
-// Add CSS file for all pages
-$document = JFactory::getDocument();
-$document->addStyleSheet('components/com_angelgirls/assets/css/angelgirls.css');
-$document->addScript('components/com_angelgirls/assets/js/angelgirls.js');
-$document->addScript('components/com_angelgirls/assets/js/jquery.mask.min.js');
 
 
 
-// Get an instance of the controller prefixed by Angelgirls
-$controller = JControllerLegacy::getInstance('Angelgirls');
-
-//jimport('joomla.filesystem.file');
-//if($controller = JFile::makeSafe(JRequest::getWord('controller'))) {
-//    $path = JPATH_COMPONENT.DIRECTORY_SEPARATOR.'controllers'.DIRECTORY_SEPARATOR.$controller.'.php';
-//    if (file_exists($path)) {
-//        require_once $path;
-//    } else {
-//        $controller = '';
-//    }
-//}
+// Get an instance of the controller prefixed by momoseo
+$controller = JControllerLegacy::getInstance('Momoseo');
 
 
-// Create the controller
-//$controller_name = 'AngelGirlsController'.ucfirst($controller);
-//$controller	= new $controller_name();
-
-
-// Perform the Request task
-//$controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->execute(JRequest::getCmd('task'));
 
 // Redirect if set by the controller

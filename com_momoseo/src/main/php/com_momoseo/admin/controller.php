@@ -20,7 +20,7 @@ jimport ( 'joomla.filesystem.folder' );
 jimport ('joomla.application.component.helper');
 
 /**
- * General Controller of Angelgirls component
+ * General Controller of MomoSEO component
  */
 class MomoseoController extends JControllerLegacy {
 	/**
@@ -39,7 +39,7 @@ class MomoseoController extends JControllerLegacy {
 		$view = strtolower ( JRequest::getVar ( 'view' ) );
 		
 		// Set the submenu
-		AngelgirlsHelper::addSubmenu ( $view );
+		MomoseoHelper::addSubmenu ( $view );
 	}
 	
 
