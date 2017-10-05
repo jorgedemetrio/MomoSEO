@@ -14,6 +14,7 @@
 		<filename>helper.php</filename>
 		<filename>tmpl/default.php</filename>
 		<filename>tmpl/index.html</filename>
+		<folder>languages</folder>
 	</files>
 	<languages>
 		<language tag="en-GB">languages/en-GB.mod_momo_seo.ini</language>
@@ -25,21 +26,20 @@
 		<language tag="pt-BR">languages/pt-BR.mod_momo_seo.ini</language>
 		<language tag="pt-BR">languages/pt-BR.mod_momo_seo.sys.ini</language>
 	</languages>
-
-	<fields name="params">
-		<fieldset name="basic">
-			<field name="cx" type="text" default="partner-pub-2442632731348664:3010243382" label="JMOD_MOMOSEO_CX" />
-			<field name="cof" type="text" default="FORID:10" label="JMOD_MOMOSEO_COF" />
-			<field name="lblBotaoBusca" type="text" default="Buscar" label="JMOD_MOMOSEO_BUSCAR" />
-			<field name="lblClass" type="text" default="mod-custom__search-block" label="JMOD_MOMOSEO_CLASS" />
-			<field name="lblImagem" type="media" label="JMOD_MOMOSEO_IMAGE" />
-		</fieldset>
-	</fields>
-
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="cx" type="text" default="partner-pub-2442632731348664:3010243382" label="JMOD_MOMOSEO_CX" />
+				<field name="cof" type="text" default="FORID:10" label="JMOD_MOMOSEO_COF" />
+				<field name="lblBotaoBusca" type="text" default="Buscar" label="JMOD_MOMOSEO_BUSCAR" />
+				<field name="lblClass" type="text" default="mod-custom__search-block" label="JMOD_MOMOSEO_CLASS" />
+				<field name="lblImagem" type="media" label="JMOD_MOMOSEO_IMAGE" />
+			</fieldset>
+		</fields>
+	</config>
 
 	<updateservers>
-		<server type="extension" name="mod_momo_busca" priority="1">http://updates.alldreams.com.br/mod_momo_busca.xml
-		</server>
+		<server type="extension" name="Momo SEO - Busca" priority="1">http://updates.alldreams.com.br/mod_momo_busca.xml</server>
 	</updateservers>
 	<config>
 	</config>

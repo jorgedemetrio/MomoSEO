@@ -1,7 +1,9 @@
 <?php
 // No direct access
 defined('_JEXEC') || die;
+
 require_once dirname(__FILE__) . '/helper.php';
+
 $cx = $params->get('cx', 'partner-pub-2442632731348664:3010243382');
 $lblBotaoBusca = $params->get('lblBotaoBusca', 'Busca');
 $lblImagem = $params->get('lblImagem');
