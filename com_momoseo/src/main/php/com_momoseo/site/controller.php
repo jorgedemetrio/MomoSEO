@@ -76,7 +76,7 @@ class MomoseoController extends JControllerLegacy{
 	
 
 
-    public function sitemapTag(){
+    public function sitemapTags(){
             $db = JFactory::getDbo ();
             $query = $db->getQuery ( true );
             $query->select("`id` , path ")
@@ -98,7 +98,32 @@ class MomoseoController extends JControllerLegacy{
             header('Content-type: application/xml');
             echo($xml);
             exit();
-        }
+      }
+
+      
+      public function sitemapOutros(){
+      	$db = JFactory::getDbo ();
+      	$query = $db->getQuery ( true );
+      	$query->select("`id` , url , prioridade ")
+      	->from ('#__mom_dyna_page')
+      	->order('data_alteracao DESC')
+      	->setLimit(50000);
+      	$db->setQuery ( $query );
+      	$results = $db->loadObjectList();
+      	$xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+      	foreach ( $results as $result){
+      		$url = (strpos( $result->url,$_SERVER['HTTP_HOST'])===false? $_SERVER['HTTP_HOST'] : "" )  . $result->url  ;
+      		$xml = $xml . "\t<url>\n";
+      		$xml = $xml . "\t\t<changefreq>monthly</changefreq>\n";
+      		$xml = $xml . "\t\t<priority>" . $result->prioridade  . "</priority>\n";
+      		$xml = $xml . "\t\t<loc>http://" .  $url . "</loc>\n";
+      		$xml = $xml . "\t</url>\n";
+      	}
+      	$xml = $xml . '</urlset>';
+      	header('Content-type: application/xml');
+      	echo($xml);
+      	exit();
+      }
 	
 	/**
 	 * Sitemap dos menus
@@ -111,16 +136,7 @@ class MomoseoController extends JControllerLegacy{
 		exit();
 	}
 
-	/**
-	 * Sitemap das JTags
-	 */
-	function sitemapTags(){
-		$xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
-		$xml = $xml . '</urlset>';
-		header('Content-type: application/xml');
-		echo($xml);
-		exit();
-	}
+
 	
 	/**
 	 * Carrega a tela de bsuca

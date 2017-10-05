@@ -11,7 +11,7 @@
 			class="inputbox"
 			validate="rules"
 			filter="rules"
-			component="com_angelgirls"
+			component="com_momoseo"
 			section="component"
 		/>
 	</fieldset>

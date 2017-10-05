@@ -11,24 +11,35 @@
 		<filename>mod_momo_busca.xml</filename>
 		<filename module="mod_momo_busca">mod_momo_busca.php</filename>
 		<filename>index.html</filename>
+		<filename>helper.php</filename>
 		<filename>tmpl/default.php</filename>
 		<filename>tmpl/index.html</filename>
 	</files>
+	<languages>
+		<language tag="en-GB">languages/en-GB.mod_momo_seo.ini</language>
+		<language tag="en-GB">languages/en-GB.mod_momo_seo.sys.ini</language>
+		<language tag="fr-FR">languages/fr-FR.mod_momo_seo.ini</language>
+		<language tag="fr-FR">languages/fr-FR.mod_momo_seo.sys.ini</language>
+		<language tag="es-ES">languages/es-ES.mod_momo_seo.ini</language>
+		<language tag="es-ES">languages/es-ES.mod_momo_seo.sys.ini</language>
+		<language tag="pt-BR">languages/pt-BR.mod_momo_seo.ini</language>
+		<language tag="pt-BR">languages/pt-BR.mod_momo_seo.sys.ini</language>
+	</languages>
 
 	<fields name="params">
 		<fieldset name="basic">
-			<field name="cx" type="text" default="partner-pub-2442632731348664:3010243382" label="ID ADSENSE PARTNER"/>
-			<field name="cof" type="text" default="FORID:10" label="cof"/>
-			
-			<field name="lblBotaoBusca" type="text" default="Buscar" label="Nome do botão de busca"/>
-			<field name="lblClass" type="text" default="mod-custom__search-block" label="Class"/>
-			<field name="lblImagem" type="media" label="Imagem"/>
+			<field name="cx" type="text" default="partner-pub-2442632731348664:3010243382" label="JMOD_MOMOSEO_CX" />
+			<field name="cof" type="text" default="FORID:10" label="JMOD_MOMOSEO_COF" />
+			<field name="lblBotaoBusca" type="text" default="Buscar" label="JMOD_MOMOSEO_BUSCAR" />
+			<field name="lblClass" type="text" default="mod-custom__search-block" label="JMOD_MOMOSEO_CLASS" />
+			<field name="lblImagem" type="media" label="JMOD_MOMOSEO_IMAGE" />
 		</fieldset>
 	</fields>
 
 
 	<updateservers>
-		<server type="extension" name="mod_momo_busca" priority="1">http://updates.alldreams.com/mod_momo_busca.xml</server>
+		<server type="extension" name="mod_momo_busca" priority="1">http://updates.alldreams.com/mod_momo_busca.xml
+		</server>
 	</updateservers>
 	<config>
 	</config>

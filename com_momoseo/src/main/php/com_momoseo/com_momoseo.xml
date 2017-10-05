@@ -28,30 +28,29 @@
 		<folder>views</folder>
 	</files>
     
-<!-- 	<install> -->
-<!--         <sql> -->
-<!--             <file charset="utf8" driver="mysql">install/installsql.mysql.utf8.sql</file> -->
-<!--         </sql> -->
-<!--     </install> -->
+	<install>
+        <sql>
+            <file charset="utf8" driver="mysql">install/installsql.mysql.utf8.sql</file>
+        </sql>
+    </install>
 
-<!--     <uninstall> -->
-<!--         <sql> -->
-<!--             <file charset="utf8" driver="mysql">install/uninstallsql.mysql.utf8.sql</file> -->
-<!--         </sql> -->
-<!--     </uninstall> -->
+    <uninstall>
+        <sql>
+            <file charset="utf8" driver="mysql">install/uninstallsql.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
 	
 	<updateservers>
-		<server type="extension" name="Sigestães &amp; Dicas" priority="1">http://updates.alldreams.com/com_momoseo.xml</server>
+		<server type="extension" name="com_momoseo" priority="1">http://updates.alldreams.com/com_momoseo.xml</server>
 	</updateservers>
 	
 	<administration>
 		<menu img="components/com_momoseo/assets/images/icons/com_momoseo-16x16.png">COM_MOMOSEO_MENU</menu>
-		<submenu>
-			<!-- Instead of link you can specify individual link attributes -->
-			<menu option="com_momoseo" view="galerias">COM_MOMOSEO_LINKS</menu>
-			<menu link="option=com_momoseo&amp;task=crow">COM_MOMOSEO_CROW</menu>
-			<menu link="option=com_momoseo&amp;task=sitemaps">COM_MOMOSEO_SITEMAP</menu>
-		</submenu>
+<!-- 		<submenu> -->
+<!-- 			<menu option="com_momoseo" view="galerias">COM_MOMOSEO_LINKS</menu> -->
+<!-- 			<menu link="option=com_momoseo&amp;task=crow">COM_MOMOSEO_CROW</menu> -->
+<!-- 			<menu link="option=com_momoseo&amp;task=sitemaps">COM_MOMOSEO_SITEMAP</menu> -->
+<!-- 		</submenu> -->
 		<files folder="admin">
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>
