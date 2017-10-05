@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `#__mom_crow_page` (
 
 CREATE TABLE IF NOT EXISTS `#__mom_sugest_page` ( 
 	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-	`url varchar(255) NOT NULL,
+	`url` varchar(255) NOT NULL,
 	`erro_id` int UNIQUE
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
