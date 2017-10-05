@@ -41,7 +41,7 @@
     </uninstall>
 	
 	<updateservers>
-		<server type="extension" name="com_momoseo" priority="1">http://updates.alldreams.com/com_momoseo.xml</server>
+		<server type="extension" name="com_momoseo" priority="1">http://updates.alldreams.com.br/com_momoseo.xml</server>
 	</updateservers>
 	
 	<administration>

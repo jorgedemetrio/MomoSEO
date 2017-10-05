@@ -32,7 +32,7 @@
 		<filename>tmpl/index.html</filename>
 	</files>
 	<updateservers>
-		<server type="extension" name="Sigestões &amp; Dicas" priority="1">http://updates.alldreams.com/momoseo/sugestoesdicas.xml</server>
+		<server type="extension" name="Sigestões &amp; Dicas" priority="1">http://updates.alldreams.com.br/momoseo/sugestoesdicas.xml</server>
 	</updateservers>
 	<config>
 	</config>
