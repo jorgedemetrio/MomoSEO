@@ -40,6 +40,7 @@ function MomoseoParseRoute($segments)
 	if(!(strpos($segments[0],'mm')===false)){
 		$vars['task'] = substr($segments[0],3);
 		$valor = array();
+		$countador = 0;
 		foreach($segments as $val){
 			if($countador>0){
 				$valor[] = $val;
@@ -48,6 +49,8 @@ function MomoseoParseRoute($segments)
 		}
 		$segments = $valor;
 	}
-	$vars['view'] = $segments[0];
+	if(sizeof($segments)){
+		$vars['view'] = $segments[0];
+	}
 	return $vars;
 }

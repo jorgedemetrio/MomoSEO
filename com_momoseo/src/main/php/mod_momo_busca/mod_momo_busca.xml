@@ -31,7 +31,6 @@
 			<fieldset name="basic">
 				<field name="cx" type="text" default="partner-pub-2442632731348664:3010243382" label="JMOD_MOMOSEO_CX" />
 				<field name="cof" type="text" default="FORID:10" label="JMOD_MOMOSEO_COF" />
-				<field name="lblBotaoBusca" type="text" default="Buscar" label="JMOD_MOMOSEO_BUSCAR" />
 				<field name="lblClass" type="text" default="mod-custom__search-block" label="JMOD_MOMOSEO_CLASS" />
 				<field name="lblImagem" type="media" label="JMOD_MOMOSEO_IMAGE" />
 			</fieldset>

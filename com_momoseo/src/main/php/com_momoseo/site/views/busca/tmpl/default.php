@@ -10,8 +10,14 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
     <input type="hidden" name="cx" value="<?php echo JRequest::get("cx");?>"/>
     <input type="hidden" name="cof" value="<?php echo JRequest::get("cof");?>"/>
     <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="20"  value="<?php echo JRequest::get("q");?>"/>
-    <input type="submit" name="sa" value="Search" />
+    <input type="text" name="q" size="20"  value="<?php echo $_GET["q"];?>"/>
+    <input class="button" name="sa" <?php 
+		if($lblImagem!=null && $lblImagem!=''){
+			echo ' src="' . $lblImagem . '" type="image" ';
+		}
+		else{ 
+			echo ' type="submit" ';
+		}?>value="<?php echo JText::_();?>" />
   </div>
 </form>
     

@@ -142,7 +142,7 @@ class MomoseoController extends JControllerLegacy{
 	 * Carrega a tela de bsuca
 	 */
 	public function buscar(){
-		$q = JRequesy::getVar('q');
+		$q = JRequest::getVar('q');
 	
 	
 		JRequest::setVar ( 'view', 'busca' );
