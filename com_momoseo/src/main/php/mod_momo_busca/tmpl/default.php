@@ -20,7 +20,7 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
 		}
 		else{ 
 			echo ' type="submit" ';
-		}?>value="<?php echo JText::_('JMOD_MOMOSEO_BUSCA')?>" />
+		}?>value="<?php echo JText::_('JMOD_MOMOSEO_BUSCAR')?>" />
   </div>
 </form>
 </div>

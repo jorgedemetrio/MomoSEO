@@ -143,7 +143,7 @@ class MomoseoController extends JControllerLegacy{
 	 */
 	public function buscar(){
 		$q = JRequest::getVar('q');
-	
+		JSearchHelper::logSearch($q, 'com_search');
 	
 		JRequest::setVar ( 'view', 'busca' );
 		JRequest::setVar ( 'layout', 'default' );
