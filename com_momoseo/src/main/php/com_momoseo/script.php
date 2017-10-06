@@ -15,7 +15,7 @@ jimport('joomla.installer.installer');
 jimport('joomla.installer.helper');
 
 /**
- * Script file of Angel Girls component
+ * Script file of MomoSEO component
  */
 class com_momoseoInstallerScript
 {
