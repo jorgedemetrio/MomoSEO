@@ -21,7 +21,7 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
 		}?>value="<?php echo $_GET["sa"];?>" />
   </div>
 </form>
-<script type="text/javascript" src="http://www.google.com.br/coop/cse/brand?form=cse-search-box&amp;lang=<?php echo JRequest::get("lang");?>"></script>
+<script type="text/javascript" src="//www.google.com.br/coop/cse/brand?form=cse-search-box&amp;lang=<?php echo JRequest::get("lang");?>"></script>
     
 
 <div id="cse-search-results"></div>
@@ -32,4 +32,4 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
   var googleSearchDomain = "www.google.com.br";
   var googleSearchPath = "/cse";
 </script>
-<script type="text/javascript" src="http://www.google.com/afsonline/show_afs_search.js"></script>
+<script type="text/javascript" src="//www.google.com/afsonline/show_afs_search.js"></script>

@@ -24,5 +24,5 @@ $url = JRoute::_('index.php?option=com_momoseo&task=buscar&Itemid='.JRequest::ge
 		}?>value="<?php echo $lblBotaoBusca; ?>" />
   </div>
 </form>
-<script type="text/javascript" src="http://www.google.com.br/coop/cse/brand?form=cse-search-box&amp;lang=<?php echo $lang;?>"></script>
+<script type="text/javascript" src="//www.google.com.br/coop/cse/brand?form=cse-search-box&amp;lang=<?php echo $lang;?>"></script>
 </div>
