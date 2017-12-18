@@ -42,10 +42,12 @@ class plgContentPlg_momoseo_content extends JPlugin
 		//Article,NewsArticle
 
 		
+		$baseURL = $protocol.$_SERVER['SERVER_NAME'];
+		$urlLocal = $baseURL.$_SERVER['REQUEST_URI'];
 		$stylelink='
 <meta property="og:locale" content="'.$article->language.'" />
 <meta property="og:title" content="'.$article->title.'" />
-<meta property="og:url" content="'.$protocol.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].'" />
+<meta property="og:url" content="'.$urlLocal.'" />
 <meta property="og:description" content="'.$article->metadesc.'" />
 <meta property="article:section" content="'.$article->category_title.'" />
 <meta property="article:author" content="'.$article->author.'" />		
@@ -57,7 +59,7 @@ class plgContentPlg_momoseo_content extends JPlugin
 		
 		
 <meta name="referrer" content="origin-when-cross-origin" />
-<link rel="canonical" href="'.$protocol.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].'"/>';
+<link rel="canonical" href="'.$urlLocal.'"/>';
 		
 		
 		$tagsStr="";
@@ -77,14 +79,14 @@ class plgContentPlg_momoseo_content extends JPlugin
 				
 		if($hasImageFulltext){
 			$stylelink.='<meta property="og:image" content="/'.$images->image_fulltext.'"/>';
-			$googleSearchImg.='"'.$protocol.$_SERVER['SERVER_NAME'].'/'.$images->image_fulltext.'"';
+			$googleSearchImg.='"'.$baseURL.'/'.$images->image_fulltext.'"';
 		}
 		elseif($hasImageIntro){
-			$stylelink.='<meta property="og:image" content="/'.$images->image_intro.'"/>';
+			$stylelink.='<meta property="og:image" content="/'.$baseURL.'/'.$images->image_intro.'"/>';
 		}
 		
 		if($hasImageIntro){
-			$googleSearchImg.=($hasImageFulltext?",":"").'"'.$protocol.$_SERVER['SERVER_NAME'].'/'.$images->image_intro.'"';
+			$googleSearchImg.=($hasImageFulltext?",":"").'"'.$baseURL.'/'.$images->image_intro.'"';
 		}
 		
 		
@@ -115,7 +117,7 @@ class plgContentPlg_momoseo_content extends JPlugin
 		    "name": "'.$config->get( 'sitename' ).'",
 		    "logo": {
 		      "@type": "ImageObject",
-		      "url": "'.$protocol.$_SERVER['SERVER_NAME'].'/images/logo.png"
+		      "url": "'.$baseURL.'/images/logo.png"
 		    }
 		  },
 		  "description": "'.$article->metadesc.'"
