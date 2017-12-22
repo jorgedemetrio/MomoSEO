@@ -2,6 +2,28 @@
 // no direct access
 defined( '_JEXEC' ) || die;
 
+jimport( 'joomla.filesystem.folder' );
+
+if(!defined('DS')){
+	define('DS',DIRECTORY_SEPARATOR);
+}
+
+
+if(!defined('FOLDER_IMAGEM_MOMOSEO')){
+	define('FOLDER_IMAGEM_MOMOSEO', 'momoseo' );
+}
+
+if(!defined('PATH_IMAGEM_MOMOSEO')){
+	define('PATH_IMAGEM_MOMOSEO', JPATH_SITE . DS . 'images' . DS . FOLDER_IMAGEM_MOMOSEO  );
+	if(!JFolder::exists(PATH_IMAGEM_MOMOSEO)){
+		JFolder::create(PATH_IMAGEM_MOMOSEO);
+	}
+}
+
+
+
+
+
 class plgContentPlg_momoseo_content extends JPlugin
 {
 	/**
@@ -18,10 +40,57 @@ class plgContentPlg_momoseo_content extends JPlugin
 	/**
 	 * Plugin method with the same name as the event will be called automatically.
 	 */
-	function onContentBeforeDisplay($context, &$article, &$params, $limitstart)
+	function onContentBeforeDisplay($context, &$article, &$params, $limitstart=0)
 	{
-		if($context!='com_content.article'){
-			return;
+		if((
+				$context=='com_content.category' ||
+				$context=='com_content.article' ||
+				$context=='com_content.featured' ) && isset($article) ){
+
+			$images  = json_decode($article->images);
+			$tam_img_intro = $this->params['img_tamanho_intro'];
+			$tam_img_artigo = $this->params['img_tamanho'];
+			
+
+			
+			$alteradoArquivos=false;
+			
+			$hasImageFulltext = ($images && isset($images) && isset($images->image_fulltext));
+			$hasImageIntro = ($images && isset($images) && isset($images->image_intro));
+			
+			
+			if($hasImageFulltext &&  strpos($images->image_fulltext, FOLDER_IMAGEM_MOMOSEO)===false) {
+				$images->image_fulltext = $this->SalvarImagem(dirname($images->image_fulltext), basename($images->image_fulltext), $tam_img_artigo );
+				$alteradoArquivos=true;
+			}
+			
+			if($hasImageIntro &&  strpos($images->image_intro, FOLDER_IMAGEM_MOMOSEO)===false) {
+				$images->image_intro = $this->SalvarImagem(dirname($images->image_intro), basename($images->image_intro), $tam_img_intro );
+				$alteradoArquivos=true;
+			}
+			
+			if($alteradoArquivos){
+				$article->images = json_encode($images);
+				$db = JFactory::getDbo();
+				$query = $db->getQuery ( true );
+				$query
+					->update($db->quoteName ( '#__content' ))
+					->set (array ($db->quoteName ( 'images' ) . ' = ' . $db->quote ( $article->images )))
+					->where ($db->quoteName ( 'id' ) . ' = ' . $article->id);
+				$db->setQuery ( $query );
+				
+				if(!$db->execute()){
+					JError::raiseWarning( 100, 'Falha interna contate a administrador.' );
+				}
+			}
+		
+		
+		}
+		
+		
+		
+		if($context!='com_content.article' || !isset($article)){
+			return '';
 		}
 		
 		
@@ -33,11 +102,12 @@ class plgContentPlg_momoseo_content extends JPlugin
 		
 		//JLayoutFile
 		
-		$images  = json_decode($article->images);
-		$tags  = $this->item->tags;
+
+		$tags  = $article->tags;
 		
 		
 
+		
 		
 		//Article,NewsArticle
 
@@ -55,11 +125,9 @@ class plgContentPlg_momoseo_content extends JPlugin
 <meta property="article:modified_time" content="'.date('Y-m-d G:i:s',$article->modified).'" />		
 <meta property="og:site_name" content="'.$config->get( 'sitename' ).'" />
 <meta property="og:type" content="article"/>
-
-		
-		
 <meta name="referrer" content="origin-when-cross-origin" />
-<link rel="canonical" href="'.$urlLocal.'"/>';
+<link rel="canonical" href="'.$urlLocal.'"/>
+<meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="https://google.com/article"/>';
 		
 		
 		$tagsStr="";
@@ -74,8 +142,7 @@ class plgContentPlg_momoseo_content extends JPlugin
 
 		
 		$googleSearchImg='';
-		$hasImageIntro = ($images && isset($images) && $images->image_fulltext && isset($images->image_fulltext));
-		$hasImageIntro = ($images && isset($images) && $images->image_intro && isset($images->image_intro));
+
 				
 		if($hasImageFulltext){
 			$stylelink.='<meta property="og:image" content="/'.$images->image_fulltext.'"/>';
@@ -98,10 +165,15 @@ class plgContentPlg_momoseo_content extends JPlugin
 		//date('YmN')==date('YmN',$article->publish_up) se for mesma semana
 		
 		
-		$googleSearch='<script type="application/ld+json">
+		$googleSearch='
+<script type="application/ld+json">
 		{
 		  "@context": "http://schema.org",
 		  "@type": "'.(date('YmN')==date('YmN',$article->publish_up)?'NewsArticle':'Article').'",
+		  "mainEntityOfPage": {
+    			"@type": "WebPage",
+  		 	 "@id": "https://google.com/article"
+ 		 },
 		  "headline": "'.$article->title.'",
 		  "image": [
 		    '.$googleSearchImg.'
@@ -122,7 +194,7 @@ class plgContentPlg_momoseo_content extends JPlugin
 		  },
 		  "description": "'.$article->metadesc.'"
 		}
-		</script>';
+</script>';
 		
 		
 		$document->addCustomTag($stylelink);
@@ -130,10 +202,137 @@ class plgContentPlg_momoseo_content extends JPlugin
 		return '<article>';
 	}
 	
-	function onContentAfterDisplay($context, &$article, &$params, $limitstart)
+	
+	private function SalvarImagem($diretorio, $arquivo, $largura=300){
+		
+
+		$logo  = $this->params['logo_intro'];
+		$fullpathArquivo=  $diretorio.DS.$arquivo;
+		
+		$relativo = str_replace(JPATH_SITE,'',$diretorio);
+		$arrRelativo  = explode(DS,$relativo);
+		$novoDiretorio = PATH_IMAGEM_MOMOSEO;
+		
+
+		foreach($arrRelativo as $nomeDir){
+			$novoDiretorio.= DS . $nomeDir;
+			if(!is_dir($novoDiretorio)){
+				mkdir($novoDiretorio);
+			}
+		}
+		
+		$newfile=$novoDiretorio . DS . $largura . '_' . $arquivo;
+		if (file_exists( $newfile )) {
+			
+			return str_replace(JPATH_SITE . DS,'',$newfile);
+			//unlink( $newfile );
+		}
+	
+		copy($fullpathArquivo,$newfile);
+		if($dados==null){
+			$dados = getimagesize($newfile);
+		}
+		
+		$dados = getimagesize($newfile,$dados);
+		$img = $this->getImg($newfile,$dados);
+
+		list($width, $height) = getimagesize($newfile);
+		$fullwidth =  $largura;
+		$fullheight = ($height / ($width/$largura));
+		$full = imagecreatetruecolor($fullwidth, $fullheight);
+	
+		
+		imagecopyresized($full, $img, 0, 0, 0, 0, $fullwidth, $fullheight, $width, $height );
+		
+		if(isset($logo)){
+			$logoImg = $this->getImg($logo);
+			
+			list($widthlogo, $heightlogo) = getimagesize($logo);
+			
+			
+			$novoWidthlogo=$widthlogo>($fullwidth*0.5)?($fullwidth*0.5):$widthlogo;
+			$novoHeightlogo=$widthlogo>($fullwidth*0.5)?( $heightlogo/($widthlogo/($fullwidth*0.5))):$heightlogo;
+			
+			imagecopyresampled($full, $logoImg, 
+					0, 0,
+					0, 0, 
+					$novoWidthlogo, $novoHeightlogo, 
+					$widthlogo, $heightlogo );
+		}
+
+		return $this->SalvarImagemNoDir($full, $newfile,$dados[2],75)? str_replace(JPATH_SITE . DS,'',$newfile) : null ;
+	
+	}
+				
+	private function SalvarImagemNoDir($img, $arquivo, $tipo, $qualidade=100){
+		$retorno = true;
+		if ($tipo & imagetypes()) {
+			switch ($tipo) {
+				case IMG_GIF:
+					if(!imagegif($img, $arquivo)){
+						$retorno = false;
+					}
+					break;
+				case IMG_JPEG:
+					if(!imagejpeg($img, $arquivo, $qualidade)){
+						$retorno = false;
+					}
+					break;
+				case IMG_PNG:
+					if(!imagepng($img, $arquivo, $qualidade)){
+						$retorno = false;
+					}
+					break;
+				case IMG_WBMP:
+					if(!imagewbmp($img, $arquivo)){
+						$retorno = false;
+					}
+					break;
+				default:
+					if(!imagejpeg($img, $arquivo, $qualidade)){
+						$retorno = false;
+					}
+					break;
+			}
+		}
+		return $retorno;
+
+	}
+	
+	private function getImg($newfile, $dados =null){
+		if($dados==null){
+			$dados = getimagesize($newfile);
+		}
+		$tipo = $dados[2];
+		if ($tipo & imagetypes()) {
+			switch ($tipo) {
+				case IMG_GIF:
+					$img = imagecreatefromgif($newfile);
+					break;
+				case IMG_JPEG:
+					$img = imagecreatefromjpeg($newfile);
+					break;
+				case IMG_PNG:
+					$img = imagecreatefrompng($newfile);
+					break;
+				case IMG_WBMP:
+					$img = imagecreatefromwbmp($newfile);
+					break;
+				default:
+					$conteudo = file_get_contents($newfile);
+					$img = imagecreatefromstring($conteudo);
+					break;
+			}
+		}
+		return $img;
+	}
+	
+	
+	
+	function onContentAfterDisplay($context, &$article, &$params, $limitstart=0)
 	{
 		if($context!='com_content.article'){
-			return;
+			return '';
 		}
 		
 		

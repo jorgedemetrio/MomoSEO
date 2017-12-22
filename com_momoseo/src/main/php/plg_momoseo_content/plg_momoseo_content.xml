@@ -17,37 +17,32 @@
 	<!-- languages>
 		<language tag="en-GB">en-GB.plg_search_categories.ini</language>
 		<language tag="en-GB">en-GB.plg_search_categories.sys.ini</language>
-	</languages>
+	</languages-->
 	<config>
 		<fields name="params">
 
 			<fieldset name="basic">
-				<field name="search_limit" type="text"
-					default="50"
-					description="JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC"
-					label="JFIELD_PLG_SEARCH_SEARCHLIMIT_LABEL"
+			
+
+				<field name="logo_intro" type="media"
+					description="Logo Tipo"
+					directory="/images/" 
+					label="Imagem logo para roberpor os Thumbs"
+				/>
+				<field name="img_tamanho_intro" type="number"
+					default="250"
+					description="Largura da imagem de intro (em pixel, porem não necesita colocar PX)"
+					label="Largura da imagem de intro"
 					size="5"
 				/>
-
-				<field name="search_content" type="radio"
-					default="0"
-					description="JFIELD_PLG_SEARCH_ALL_DESC"
-					label="JFIELD_PLG_SEARCH_ALL_LABEL"
-				>
-					<option value="0">JOFF</option>
-					<option value="1">JON</option>
-				</field>
-
-				<field name="search_archived" type="radio"
-					default="0"
-					description="JFIELD_PLG_SEARCH_ARCHIVED_DESC"
-					label="JFIELD_PLG_SEARCH_ARCHIVED_LABEL"
-				>
-					<option value="0">JOFF</option>
-					<option value="1">JON</option>
-				</field>
+				<field name="img_tamanho" type="number"
+					default="700"
+					description="Largura da imagem do artigo (em pixel, porem não necesita colocar PX)"
+					label="Largura da imagem do artigoo"
+					size="5"
+				/>
 			</fieldset>
 
 		</fields>
-	</config-->
+	</config>
 </extension>
