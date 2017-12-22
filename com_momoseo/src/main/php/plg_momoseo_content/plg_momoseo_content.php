@@ -35,58 +35,104 @@ class plgContentPlg_momoseo_content extends JPlugin
 	 */
 	protected $autoloadLanguage = true;
 
+	/*function onContentBeforeSave($context, &$article, $isNew=false){
+		if($context=='com_content.article' || !isset($article) ){
 
+			$images  = json_decode($article->images);
+			$tam_img_intro = $this->params['img_tamanho_intro'];
+			$tam_img_artigo = $this->params['img_tamanho'];
+				
+			
+				
+			$alteradoArquivos=false;
+				
+			$hasImageFulltext = ($images && isset($images) && isset($images->image_fulltext));
+			$hasImageIntro = ($images && isset($images) && isset($images->image_intro));
+				
+				
+			if($hasImageFulltext &&  strpos($images->image_fulltext, FOLDER_IMAGEM_MOMOSEO)===false) {
+				$images->image_fulltext = $this->SalvarImagem(dirname($images->image_fulltext), basename($images->image_fulltext), $tam_img_artigo );
+				$alteradoArquivos=true;
+			}
+				
+			if($hasImageIntro &&  strpos($images->image_intro, FOLDER_IMAGEM_MOMOSEO)===false) {
+				$images->image_intro = $this->SalvarImagem(dirname($images->image_intro), basename($images->image_intro), $tam_img_intro );
+				$alteradoArquivos=true;
+			}
+				
+			if($alteradoArquivos){
+				$article->images = json_encode($images);
+				if(!$isNew && isset($article->id)){
+					$db = JFactory::getDbo();
+					$query = $db->getQuery ( true );
+					$query
+					->update($db->quoteName ( '#__content' ))
+					->set (array ($db->quoteName ( 'images' ) . ' = ' . $db->quote ( $article->images )))
+					->where ($db->quoteName ( 'id' ) . ' = ' . $article->id);
+					$db->setQuery ( $query );
+				
+					if(!$db->execute()){
+						JError::raiseWarning( 100, 'Falha interna contate a administrador.' );
+					}
+				}
+			}
+		}
+		return true;
+	}*/
+	
+	
 	
 	/**
 	 * Plugin method with the same name as the event will be called automatically.
 	 */
 	function onContentBeforeDisplay($context, &$article, &$params, $limitstart=0)
 	{
+		$images  = json_decode($article->images);
+		
 		if((
 				$context=='com_content.category' ||
 				$context=='com_content.article' ||
 				$context=='com_content.featured' ) && isset($article) ){
+		
 
-			$images  = json_decode($article->images);
-			$tam_img_intro = $this->params['img_tamanho_intro'];
-			$tam_img_artigo = $this->params['img_tamanho'];
-			
-
-			
-			$alteradoArquivos=false;
-			
-			$hasImageFulltext = ($images && isset($images) && isset($images->image_fulltext));
-			$hasImageIntro = ($images && isset($images) && isset($images->image_intro));
-			
-			
-			if($hasImageFulltext &&  strpos($images->image_fulltext, FOLDER_IMAGEM_MOMOSEO)===false) {
-				$images->image_fulltext = $this->SalvarImagem(dirname($images->image_fulltext), basename($images->image_fulltext), $tam_img_artigo );
-				$alteradoArquivos=true;
-			}
-			
-			if($hasImageIntro &&  strpos($images->image_intro, FOLDER_IMAGEM_MOMOSEO)===false) {
-				$images->image_intro = $this->SalvarImagem(dirname($images->image_intro), basename($images->image_intro), $tam_img_intro );
-				$alteradoArquivos=true;
-			}
-			
-			if($alteradoArquivos){
-				$article->images = json_encode($images);
-				$db = JFactory::getDbo();
-				$query = $db->getQuery ( true );
-				$query
-					->update($db->quoteName ( '#__content' ))
-					->set (array ($db->quoteName ( 'images' ) . ' = ' . $db->quote ( $article->images )))
-					->where ($db->quoteName ( 'id' ) . ' = ' . $article->id);
-				$db->setQuery ( $query );
-				
-				if(!$db->execute()){
-					JError::raiseWarning( 100, 'Falha interna contate a administrador.' );
-				}
-			}
+					$tam_img_intro = $this->params['img_tamanho_intro'];
+					$tam_img_artigo = $this->params['img_tamanho'];
+						
+		
+						
+					$alteradoArquivos=false;
+						
+					$hasImageFulltext = ($images && isset($images) && isset($images->image_fulltext));
+					$hasImageIntro = ($images && isset($images) && isset($images->image_intro));
+						
+						
+					if($hasImageFulltext &&  strpos($images->image_fulltext, FOLDER_IMAGEM_MOMOSEO)===false) {
+						$images->image_fulltext = $this->SalvarImagem(dirname($images->image_fulltext), basename($images->image_fulltext), $tam_img_artigo );
+						$alteradoArquivos=true;
+					}
+						
+					if($hasImageIntro &&  strpos($images->image_intro, FOLDER_IMAGEM_MOMOSEO)===false) {
+						$images->image_intro = $this->SalvarImagem(dirname($images->image_intro), basename($images->image_intro), $tam_img_intro );
+						$alteradoArquivos=true;
+					}
+						
+					if($alteradoArquivos){
+						$article->images = json_encode($images);
+						$db = JFactory::getDbo();
+						$query = $db->getQuery ( true );
+						$query
+						->update($db->quoteName ( '#__content' ))
+						->set (array ($db->quoteName ( 'images' ) . ' = ' . $db->quote ( $article->images )))
+						->where ($db->quoteName ( 'id' ) . ' = ' . $article->id);
+						$db->setQuery ( $query );
+		
+						if(!$db->execute()){
+							JError::raiseWarning( 100, 'Falha interna contate a administrador.' );
+						}
+					}
 		
 		
 		}
-		
 		
 		
 		if($context!='com_content.article' || !isset($article)){
