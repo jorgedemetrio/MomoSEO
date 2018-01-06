@@ -14,14 +14,11 @@ if(!defined('FOLDER_IMAGEM_MOMOSEO')){
 }
 
 if(!defined('PATH_IMAGEM_MOMOSEO')){
-	define('PATH_IMAGEM_MOMOSEO', JPATH_SITE . DS . 'images' . DS . FOLDER_IMAGEM_MOMOSEO  );
+	define('PATH_IMAGEM_MOMOSEO', JPATH_SITE . DS . 'images' . DS . FOLDER_IMAGEM_MOMOSEO );
 	if(!JFolder::exists(PATH_IMAGEM_MOMOSEO)){
 		JFolder::create(PATH_IMAGEM_MOMOSEO);
 	}
 }
-
-
-
 
 
 class plgContentPlg_momoseo_content extends JPlugin
@@ -30,71 +27,83 @@ class plgContentPlg_momoseo_content extends JPlugin
 	 * Load the language file on instantiation. Note this is only available in Joomla 3.1 and higher.
 	 * If you want to support 3.0 series you must override the constructor
 	 *
-	 * @var    boolean
-	 * @since  3.1
+	 * @var boolean
+	 * @since 3.1
 	 */
 	protected $autoloadLanguage = true;
 
-
+	const ARTICLE = 'com_content.article';
+	const FORMATO_DATA_PADRAO='Y-m-d\TH:i:sP';
+	const TIPO_INTRO='intro';
+	const TIPO_FULL='full';
+	
+	
+	
 	private function checarImagens($context, &$article){
-
-		
 		if((
-				$context=='com_content.category' ||
-				$context=='com_content.article' ||
-				$context=='com_content.featured' ) && isset($article) ){
+			$context=='com_content.category' ||
+			$context== plgContentPlg_momoseo_content::ARTICLE ||
+			$context=='com_content.featured' ) && isset($article) ){
+			$images = json_decode($article->images);
+			$tam_img_intro = $this->params['img_tamanho_intro'];
+			$tam_img_artigo = $this->params['img_tamanho'];
+			$hasImageFulltext = ($images && isset($images) && isset($images->image_fulltext));
+			$hasImageIntro = ($images && isset($images) && isset($images->image_intro));
 			
-					
-					$images  = json_decode($article->images);
-		
-					$tam_img_intro = $this->params['img_tamanho_intro'];
-					$tam_img_artigo = $this->params['img_tamanho'];
-		
-		
-		
-					$alteradoArquivos=false;
-		
-					$hasImageFulltext = ($images && isset($images) && isset($images->image_fulltext));
-					$hasImageIntro = ($images && isset($images) && isset($images->image_intro));
-		
-		
-					if($hasImageFulltext &&  (strpos($images->image_fulltext, FOLDER_IMAGEM_MOMOSEO)===false)) {
-						$images->image_fulltext = $this->SalvarImagem(dirname($images->image_fulltext), 
-										basename($images->image_fulltext), 
-										$tam_img_artigo,
-										$this->params['qualida_full'],
-										$this->params['alinhamento_h_full'],
-										$this->params['alinhamento_v_full']);
-						$alteradoArquivos=true;
-					}
-		
-					if($hasImageIntro &&  (strpos($images->image_intro, FOLDER_IMAGEM_MOMOSEO)===false)) {
-						$images->image_intro = $this->SalvarImagem(dirname($images->image_intro), 
-										basename($images->image_intro), 
-										$tam_img_intro,
-										$this->params['qualida_intro'],
-										$this->params['alinhamento_h_intro'],
-										$this->params['alinhamento_v_intro'] );
-						$alteradoArquivos=true;
-					}
-		
-					if($alteradoArquivos){
-						$article->images = json_encode($images);
-						$db = JFactory::getDbo();
-						$query = $db->getQuery ( true );
-						$query
-						->update($db->quoteName ( '#__content' ))
-						->set (array ($db->quoteName ( 'images' ) . ' = ' . $db->quote ( $article->images )))
-						->where ($db->quoteName ( 'id' ) . ' = ' . $article->id);
-						$db->setQuery ( $query );
-		
-						if(!$db->execute()){
-							JError::raiseWarning( 100, 'Falha interna contate a administrador.' );
-						}
-					}
-		
-		
+			$alteradoArquivos = $this->tratarImagem($images, $tam_img_artigo, plgContentPlg_momoseo_content::TIPO_FULL, $hasImageFulltext);
+			$alteradoArquivosIntro = $this->tratarImagem($images, $tam_img_intro, plgContentPlg_momoseo_content::TIPO_INTRO, $hasImageIntro);
+			
+			if($alteradoArquivos || $alteradoArquivosIntro){
+				$this->atualizarDadosArtigo($article, $images);
+			}
 		}
+	}
+	
+	private function tratarImagem(&$images, $tam_img, $tipo, $hasImage){
+		$alteradoArquivos = false;
+		if($tipo!=plgContentPlg_momoseo_content::TIPO_INTRO){
+			$imagem =$images->image_intro;
+		}
+		else{
+			$imagem = $images->image_fulltext;
+		}
+		
+		if($hasImage && (strpos($imagem, FOLDER_IMAGEM_MOMOSEO)===false)) {
+			$imagem = $this->SalvarImagem(dirname($imagem),
+					basename($imagem),
+					$tam_img,
+					$this->params['qualida_'.$tipo],
+					$this->params['alinhamento_h_'.$tipo],
+					$this->params['alinhamento_v_'.$tipo] );
+			
+			if($tipo==plgContentPlg_momoseo_content::TIPO_INTRO){
+				$images->origem_intro= $images->image_intro;
+				$images->image_intro = $imagem;
+			}
+			else{
+				$images->origem_full= $images->image_fulltext;
+				$images->image_fulltext = $imagem;
+			}
+			
+			$alteradoArquivos=true;
+		}
+		return $alteradoArquivos;
+	}
+	
+	private function atualizarDadosArtigo (&$article, $images){
+			$images->dataAlteradoMomoSEO = date("d/m/Y H:i:s");
+			$article->images = json_encode($images);
+			$db = JFactory::getDbo();
+			$query = $db->getQuery ( true );
+			$query
+			->update($db->quoteName ( '#__content' ))
+			->set (array ($db->quoteName ( 'images' ) . ' = ' . $db->quote ( $article->images )))
+			->where ($db->quoteName ( 'id' ) . ' = ' . $article->id);
+			$db->setQuery ( $query );
+		
+			if(!$db->execute()){
+				JError::raiseWarning( 100, 'Falha interna contate a administrador.' );
+			}
 		
 	}
 	
@@ -108,12 +117,12 @@ class plgContentPlg_momoseo_content extends JPlugin
 		
 		$this->checarImagens($context, $article);
 		
-		if($context!='com_content.article' || !isset($article)){
+		if($context!=plgContentPlg_momoseo_content::ARTICLE || !isset($article)){
 			return '';
 		}
 		
-		$images  = json_decode($article->images);
-		$tags  = $article->tags;
+		$images = json_decode($article->images);
+		$tags = $article->tags;
 		
 		$hasImageFulltext = ($images && isset($images) && isset($images->image_fulltext));
 		$hasImageIntro = ($images && isset($images) && isset($images->image_intro));
@@ -132,8 +141,8 @@ class plgContentPlg_momoseo_content extends JPlugin
 <meta property="og:description" content="'.$article->metadesc.'" />
 <meta property="article:section" content="'.$article->category_title.'" />
 <meta property="article:author" content="'.$article->author.'" />		
-<meta property="article:published_time" content="'.JFactory::getDate($article->publish_up)->format('Y-m-d\TH:i:sP').'" />		
-<meta property="article:modified_time" content="'.JFactory::getDate($article->modified)->format('Y-m-d\TH:i:sP').'" />		
+<meta property="article:published_time" content="'.JFactory::getDate($article->publish_up)->format(plgContentPlg_momoseo_content::FORMATO_DATA_PADRAO).'" />		
+<meta property="article:modified_time" content="'.JFactory::getDate($article->modified)->format(plgContentPlg_momoseo_content::FORMATO_DATA_PADRAO).'" />		
 <meta property="og:site_name" content="'.$config->get( 'sitename' ).'" />
 <meta property="og:type" content="article"/>
 <meta name="referrer" content="origin-when-cross-origin" />
@@ -166,44 +175,40 @@ class plgContentPlg_momoseo_content extends JPlugin
 		if($hasImageIntro){
 			$googleSearchImg.=($hasImageFulltext?",":"").'"'.$baseURL.'/'.$images->image_intro.'"';
 		}
-		
-		
-		
 
 		//Mais em 
 		//https://developers.google.com/search/docs/data-types/articles#amp
 		//http://ogp.me/#type_article
 		//date('YmN')==date('YmN',$article->publish_up) se for mesma semana
 		
-		
 		$googleSearch='
 <script type="application/ld+json">
 		{
-		  "@context": "http://schema.org",
-		  "@type": "'.(date('YmN')==JFactory::getDate($article->publish_up)->format('YmN')?'NewsArticle':'Article').'",
-		  "mainEntityOfPage": {
-    			"@type": "WebPage",
-  		 	 "@id": "https://google.com/article"
+		 "@context": "http://schema.org",
+		 "@type": "'.(date('YmN')==JFactory::getDate($article->publish_up)->format('YmN')?'NewsArticle':'Article').'",
+		 "mainEntityOfPage": {
+ 			"@type": "WebPage",
+ 		 	 "@id": "https://google.com/article"
  		 },
-		  "headline": "'.$article->title.'",
-		  "image": [
-		    '.$googleSearchImg.'
-		   ],
-		  "datePublished": "'.JFactory::getDate($article->publish_up)->format('Y-m-d\TH:i:sP').'",
-		  "dateModified": "'.JFactory::getDate($article->modified)->format('Y-m-d\TH:i:sP').'",
-		  "author": {
-		    "@type": "Person",
-		    "name": "'.$article->author.'"
-		  },
-		   "publisher": {
-		    "@type": "Organization",
-		    "name": "'.$config->get( 'sitename' ).'",
-		    "logo": {
-		      "@type": "ImageObject",
-		      "url": "'.$baseURL.'/images/logo.png"
-		    }
-		  },
-		  "description": "'.$article->metadesc.'"
+		 "headline": "'.$article->title.'",
+		 "image": [
+		 '.$googleSearchImg.'
+		 ],
+		 "datePublished": "'.JFactory::getDate($article->publish_up)->format(plgContentPlg_momoseo_content::FORMATO_DATA_PADRAO).'",
+		 "dateModified": "'.JFactory::getDate($article->modified)->format(plgContentPlg_momoseo_content::FORMATO_DATA_PADRAO).'",
+		 "author": {
+		 "@type": "Person",
+		 "name": "'.$article->author.'"
+		 },
+		 "publisher": {
+		 "@type": "Organization",
+		 "name": "'.$config->get( 'sitename' ).'",
+		 "logo": {
+		 "@type": "ImageObject",
+		 "url": "'.$baseURL.'/images/logo.png"
+		 }
+		 },
+		 "description": "'.$article->metadesc.'"
 		}
 </script>';
 		
@@ -217,10 +222,10 @@ class plgContentPlg_momoseo_content extends JPlugin
 	private function SalvarImagem($diretorio, $arquivo, $largura=300, $qualidade=75, $posicao_h_logo=1, $posicao_v_logo=1){
 		
 
-		$logo  = $this->params['logo_intro'];
+		$logo = $this->params['logo_intro'];
 		
 		$relativo = str_replace(JPATH_SITE,'',$diretorio);
-		$arrRelativo  = explode(DS,$relativo);
+		$arrRelativo = explode(DS,$relativo);
 		$novoDiretorio = PATH_IMAGEM_MOMOSEO;
 		$arquivoPathCompleto = JPATH_SITE . DS . $diretorio.DS.$arquivo;
 		
@@ -233,7 +238,7 @@ class plgContentPlg_momoseo_content extends JPlugin
 		}
 		
 		
-		$newfile=$novoDiretorio . DS . $largura . '_' .  (substr($arquivo,0,strrpos($arquivo,'.') ) . '.jpg' ) ;
+		$newfile=$novoDiretorio . DS . $largura . '_' . (substr($arquivo,0,strrpos($arquivo,'.') ) . '.jpg' ) ;
 		if (file_exists( $newfile )) {
 			return str_replace(JPATH_SITE . DS,'',$newfile);
 		}
@@ -242,7 +247,7 @@ class plgContentPlg_momoseo_content extends JPlugin
 		$img = $this->getImg($arquivoPathCompleto);
 		
 		list($width, $height) = getimagesize($arquivoPathCompleto);
-		$fullwidth =  $largura;
+		$fullwidth = $largura;
 		$fullheight = intval($height / ($width/$largura));
 		$full = imagecreatetruecolor($fullwidth, $fullheight);
 		
@@ -330,7 +335,7 @@ class plgContentPlg_momoseo_content extends JPlugin
 	
 	function onContentAfterDisplay($context, &$article, &$params, $limitstart=0)
 	{
-		if($context!='com_content.article'){
+		if($context!=plgContentPlg_momoseo_content::ARTICLE){
 			return '';
 		}
 		

@@ -37,40 +37,49 @@ class MomoseoController extends JControllerLegacy{
 		parent::display ( $cachable );
 
 		// set view
-		$view = strtolower ( JRequest::getVar ( 'view' ) );
+		//  $view = strtolower ( JRequest::getVar ( 'view' ) );
+		// Não será mais usado
 
 	}
-
+	
+	const HEADER_XML_SITEMAOP =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+	const CONTENT_TYPE_XML ='Content-type: application/xml';
+	const SITEMAP_TAGS1 = "\t<url>\n";
+	const SITEMAP_TAGS2 = "\t\t<changefreq>monthly</changefreq>\n\t\t<priority>0.3</priority>\n";
+	const SITEMAP_TAGS3 = "\t</url>\n";
+	const SITEMAP_TAGS4 = '</urlset>';
+	const HTTPS_HOST = 'HTTP_HOST';
 
 	/**
 	 * Sitemap content
 	 */
 	public function sitemapContent(){
 		$db = JFactory::getDbo ();
+		$host = $_SERVER[MomoseoController::HTTPS_HOST] ;
+		
+		$publish_up = $db->quoteName ( 'publish_up' );
+		
 		$query = $db->getQuery ( true );
 		$query->select("`id` , id + ':' + alias as slug, catid, language, modified  ")
 		->from ('#__content')
-		->where ('(' . $db->quoteName ( 'publish_up' ) . '  <= NOW()  || '
-				. $db->quoteName ( 'publish_up' ) . ' IS NULL || '
-				. $db->quoteName ( 'publish_up' ) . " = '0000-00-00 00:00:00' )" )
+		->where ("( $publish_up <= NOW()  || $publish_up  IS NULL || $publish_up = '0000-00-00 00:00:00' )" )
 				->where ( $db->quoteName ( 'state' ) . ' = 1  ' )
 				->order('created DESC')
 				->setLimit(50000);
 		$db->setQuery ( $query );
 		$results = $db->loadObjectList();
-		$xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+		$xml = MomoseoController::HEADER_XML_SITEMAOP;
 		foreach ( $results as $result){
-			$url = $_SERVER['HTTP_HOST'] . JRoute::_(ContentHelperRoute::getArticleRoute($result->slug, $result->catid, $result->language));
-			$xml = $xml . "\t<url>\n";
+			$url = $host . JRoute::_(ContentHelperRoute::getArticleRoute($result->slug, $result->catid, $result->language));
+			$xml = $xml . SITEMAP_TAGS1;
 			$xml = $xml . "\t\t<lastmod>" . JFactory::getDate($result->modified)->format('Y-m-d\TH:i:sP')  . "</lastmod>\n";
-			$xml = $xml . "\t\t<changefreq>monthly</changefreq>\n";
-			$xml = $xml . "\t\t<priority>0.3</priority>\n";
-			$xml = $xml . "\t\t<loc>http://" .  $url . "</loc>\n";
-			$xml = $xml . "\t</url>\n";
+			$xml = $xml . MomoseoController::SITEMAP_TAGS2;
+			$xml = $xml . "\t\t<loc>http://$url</loc>\n";
+			$xml = $xml . MomoseoController::SITEMAP_TAGS3;
 		}
-		$xml = $xml . '</urlset>';
-		header('Content-type: application/xml');
-		echo($xml);
+		$xml = $xml . MomoseoController::SITEMAP_TAGS4;
+		header(MomoseoController::CONTENT_TYPE_XML);
+		echo $xml;
 		exit();
 	}
 	
@@ -78,6 +87,8 @@ class MomoseoController extends JControllerLegacy{
 
     public function sitemapTags(){
             $db = JFactory::getDbo ();
+            $host = $_SERVER[MomoseoController::HTTPS_HOST] ;
+            
             $query = $db->getQuery ( true );
             $query->select("`id` , path ")
             ->from ('#__tags')
@@ -85,24 +96,25 @@ class MomoseoController extends JControllerLegacy{
                                 ->setLimit(50000);
             $db->setQuery ( $query );
             $results = $db->loadObjectList(); 
-            $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+            $xml = MomoseoController::HEADER_XML_SITEMAOP;
             foreach ( $results as $result){ 
-                        $url = $_SERVER['HTTP_HOST'].'/component/tags/tag/' . $result->id  . '-' . $result->path  . '.html';
-                        $xml = $xml . "\t<url>\n"; 
-                        $xml = $xml . "\t\t<changefreq>monthly</changefreq>\n"; 
-                        $xml = $xml . "\t\t<priority>0.3</priority>\n";
+                        $url = $host.'/component/tags/tag/' . $result->id  . '-' . $result->path  . '.html';
+                        $xml = $xml . MomoseoController::SITEMAP_TAGS1; 
+                        $xml = $xml . MomoseoController::SITEMAP_TAGS2;
                         $xml = $xml . "\t\t<loc>http://" .  $url . "</loc>\n";
-                        $xml = $xml . "\t</url>\n";
+                        $xml = $xml . MomoseoController::SITEMAP_TAGS3;
             }
-            $xml = $xml . '</urlset>';
-            header('Content-type: application/xml');
-            echo($xml);
+            $xml = $xml . MomoseoController::SITEMAP_TAGS4;
+            header(MomoseoController::CONTENT_TYPE_XML);
+            echo $xml;
             exit();
       }
 
       
       public function sitemapOutros(){
       	$db = JFactory::getDbo ();
+      	$host = $_SERVER[MomoseoController::HTTPS_HOST] ;
+      	
       	$query = $db->getQuery ( true );
       	$query->select("`id` , url , prioridade ")
       	->from ('#__mom_dyna_page')
@@ -110,18 +122,18 @@ class MomoseoController extends JControllerLegacy{
       	->setLimit(50000);
       	$db->setQuery ( $query );
       	$results = $db->loadObjectList();
-      	$xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+      	$xml = MomoseoController::HEADER_XML_SITEMAOP;
       	foreach ( $results as $result){
-      		$url = (strpos( $result->url,$_SERVER['HTTP_HOST'])===false? $_SERVER['HTTP_HOST'] : "" )  . $result->url  ;
-      		$xml = $xml . "\t<url>\n";
+      		$url = (strpos( $result->url,$host)===false? $host : "" )  . $result->url  ;
+      		$xml = $xml . MomoseoController::SITEMAP_TAGS1;
       		$xml = $xml . "\t\t<changefreq>monthly</changefreq>\n";
       		$xml = $xml . "\t\t<priority>" . $result->prioridade  . "</priority>\n";
       		$xml = $xml . "\t\t<loc>http://" .  $url . "</loc>\n";
-      		$xml = $xml . "\t</url>\n";
+      		$xml = $xml . MomoseoController::SITEMAP_TAGS3;
       	}
-      	$xml = $xml . '</urlset>';
-      	header('Content-type: application/xml');
-      	echo($xml);
+      	$xml = $xml . MomoseoController::SITEMAP_TAGS4;
+      	header(MomoseoController::CONTENT_TYPE_XML);
+      	echo $xml;
       	exit();
       }
 	
@@ -129,10 +141,10 @@ class MomoseoController extends JControllerLegacy{
 	 * Sitemap dos menus
 	 */
 	function sitemapMenus(){
-		$xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
-		$xml = $xml . '</urlset>';
-		header('Content-type: application/xml');
-		echo($xml);
+		$xml = MomoseoController::HEADER_XML_SITEMAOP;
+		$xml = $xml . MomoseoController::SITEMAP_TAGS4;
+		header(MomoseoController::CONTENT_TYPE_XML);
+		echo $xml;
 		exit();
 	}
 

@@ -15,6 +15,6 @@ if (JRequest::getVar ( 'task' ) == null || JRequest::getVar ( 'task' ) == '') {
 <div class="row">
 	<div id="conteudo" class="col col-xs-12 col-sm-9 col-md-9 col-lg-10">
 		<h3>Coment&aacute;rios</h3>
-		<div class="fb-comments" data-href="http://<?php echo($_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']); ?>" data-width="100%" style="margin: 0 auto;"></div>
+		<div class="fb-comments" data-href="http://<?php echo $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>" data-width="100%" style="margin: 0 auto;"></div>
 	</div>
 </div>
