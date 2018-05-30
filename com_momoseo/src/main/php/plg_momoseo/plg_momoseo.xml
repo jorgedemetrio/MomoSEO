@@ -14,7 +14,7 @@
 		<filename>index.html</filename>
 		<filename  plugin="plg_momoseo">plg_momoseo.php</filename>
 	</files>
-	<!-- languages>
+	<languages>
 		<language tag="en-GB">en-GB.plg_search_categories.ini</language>
 		<language tag="en-GB">en-GB.plg_search_categories.sys.ini</language>
 	</languages>
@@ -49,5 +49,5 @@
 			</fieldset>
 
 		</fields>
-	</config-->
+	</config>
 </extension>
