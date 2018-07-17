@@ -28,7 +28,7 @@ jimport('joomla.log.log');
  * MomoSEO Component Controller
  */
 class MomoseoController extends JControllerLegacy{
-	
+
 	function display($cachable = false, $urlparams = false) {
 		// set default view if not set
 		JRequest::setVar ( 'view', JRequest::getCmd ( 'view', 'Momoseo' ) );
@@ -41,7 +41,7 @@ class MomoseoController extends JControllerLegacy{
 		// Não será mais usado
 
 	}
-	
+
 	const HEADER_XML_SITEMAOP =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 	const CONTENT_TYPE_XML ='Content-type: application/xml';
 	const SITEMAP_TAGS1 = "\t<url>\n";
@@ -56,9 +56,9 @@ class MomoseoController extends JControllerLegacy{
 	public function sitemapContent(){
 		$db = JFactory::getDbo ();
 		$host = $_SERVER[MomoseoController::HTTPS_HOST] ;
-		
+
 		$publish_up = $db->quoteName ( 'publish_up' );
-		
+
 		$query = $db->getQuery ( true );
 		$query->select("`id` , id + ':' + alias as slug, catid, language, modified  ")
 		->from ('#__content')
@@ -71,7 +71,7 @@ class MomoseoController extends JControllerLegacy{
 		$xml = MomoseoController::HEADER_XML_SITEMAOP;
 		foreach ( $results as $result){
 			$url = $host . JRoute::_(ContentHelperRoute::getArticleRoute($result->slug, $result->catid, $result->language));
-			$xml = $xml . SITEMAP_TAGS1;
+			$xml = $xml . MomoseoController::SITEMAP_TAGS1;
 			$xml = $xml . "\t\t<lastmod>" . JFactory::getDate($result->modified)->format('Y-m-d\TH:i:sP')  . "</lastmod>\n";
 			$xml = $xml . MomoseoController::SITEMAP_TAGS2;
 			$xml = $xml . "\t\t<loc>http://$url</loc>\n";
@@ -82,24 +82,24 @@ class MomoseoController extends JControllerLegacy{
 		echo $xml;
 		exit();
 	}
-	
+
 
 
     public function sitemapTags(){
             $db = JFactory::getDbo ();
             $host = $_SERVER[MomoseoController::HTTPS_HOST] ;
-            
+
             $query = $db->getQuery ( true );
             $query->select("`id` , path ")
             ->from ('#__tags')
                                 ->order('published DESC')
                                 ->setLimit(50000);
             $db->setQuery ( $query );
-            $results = $db->loadObjectList(); 
+            $results = $db->loadObjectList();
             $xml = MomoseoController::HEADER_XML_SITEMAOP;
-            foreach ( $results as $result){ 
+            foreach ( $results as $result){
                         $url = $host.'/component/tags/tag/' . $result->id  . '-' . $result->path  . '.html';
-                        $xml = $xml . MomoseoController::SITEMAP_TAGS1; 
+                        $xml = $xml . MomoseoController::SITEMAP_TAGS1;
                         $xml = $xml . MomoseoController::SITEMAP_TAGS2;
                         $xml = $xml . "\t\t<loc>http://" .  $url . "</loc>\n";
                         $xml = $xml . MomoseoController::SITEMAP_TAGS3;
@@ -110,11 +110,11 @@ class MomoseoController extends JControllerLegacy{
             exit();
       }
 
-      
+
       public function sitemapOutros(){
       	$db = JFactory::getDbo ();
       	$host = $_SERVER[MomoseoController::HTTPS_HOST] ;
-      	
+
       	$query = $db->getQuery ( true );
       	$query->select("`id` , url , prioridade ")
       	->from ('#__mom_dyna_page')
@@ -136,7 +136,7 @@ class MomoseoController extends JControllerLegacy{
       	echo $xml;
       	exit();
       }
-	
+
 	/**
 	 * Sitemap dos menus
 	 */
@@ -149,14 +149,14 @@ class MomoseoController extends JControllerLegacy{
 	}
 
 
-	
+
 	/**
 	 * Carrega a tela de bsuca
 	 */
 	public function buscar(){
 		$q = JRequest::getVar('q');
 		JSearchHelper::logSearch($q, 'com_search');
-	
+
 		JRequest::setVar ( 'view', 'busca' );
 		JRequest::setVar ( 'layout', 'default' );
 		parent::display (true, false);
