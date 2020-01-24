@@ -61,7 +61,7 @@ class plgContentPlg_momoseo_content extends JPlugin
 	
 	private function tratarImagem(&$images, $tam_img, $tipo, $hasImage){
 		$alteradoArquivos = false;
-		if($tipo!=plgContentPlg_momoseo_content::TIPO_INTRO){
+		if($tipo==plgContentPlg_momoseo_content::TIPO_INTRO){
 			$imagem =$images->image_intro;
 		}
 		else{
