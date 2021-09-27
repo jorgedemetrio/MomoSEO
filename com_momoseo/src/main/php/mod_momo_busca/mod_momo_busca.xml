@@ -2,7 +2,7 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
 	<name>Momo SEO - Busca</name>
 	<author>Jorge Demetrio</author>
-	<version>{VERSAO}</version>
+	<version>1.0.0</version>
 	<description>Módulo De busca</description>
 
 

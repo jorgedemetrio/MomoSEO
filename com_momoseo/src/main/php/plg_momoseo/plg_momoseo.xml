@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>jorge.demetrio@alldreams.com.br</authorEmail>
 	<authorUrl>www.alldreams.com.br</authorUrl>
-	<version>{VERSAO}</version>
+	<version>1.0.0</version>
 	<description>PLG_SEARCH_CATEGORIES_XML_DESCRIPTION</description>
 	<files>
 		<filename>index.html</filename>
