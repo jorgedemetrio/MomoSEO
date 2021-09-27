@@ -37,9 +37,11 @@ jimport('joomla.application.component.controller');
 
 // Get an instance of the controller prefixed by Momoseo
 $controller = JControllerLegacy::getInstance('Momoseo');
+$application = JFactory::getApplication();
+$input = $application->input;
 
 // Perform the request task
-$controller->execute(JRequest::getCmd('task'));
+$controller->execute($input->get('task', null, 'Momoseo', 'cmd'));//JRequest::getCmd('task'));
 
 
 

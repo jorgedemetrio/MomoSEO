@@ -22,7 +22,7 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_momoseo')){
 }
 
 // Load cms libraries
-JLoader::registerPrefix('J', JPATH_PLATFORM . '/cms');
+//JLoader::registerPrefix('J', JPATH_PLATFORM . '/cms');
 // Load joomla libraries without overwrite
 JLoader::registerPrefix('J', JPATH_PLATFORM . '/joomla',false);
 

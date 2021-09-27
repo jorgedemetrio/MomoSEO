@@ -16,8 +16,6 @@ jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
 jimport('joomla.application.component.helper');
 include_once JPATH_BASE .DS.'components/com_content/models/article.php';
-require_once JPATH_BASE .DS.'components/com_content/helpers/route.php';
-require_once JPATH_BASE .DS.'components/com_content/helpers/query.php';
 jimport( 'joomla.application.module.helper' );
 jimport( 'joomla.mail.mail' );
 jimport('joomla.log.log');
@@ -31,7 +29,13 @@ class MomoseoController extends JControllerLegacy{
 
 	function display($cachable = false, $urlparams = false) {
 		// set default view if not set
-		JRequest::setVar ( 'view', JRequest::getCmd ( 'view', 'Momoseo' ) );
+
+		$application = JFactory::getApplication();
+		$input = $application->input;
+		
+		$input->set( 'view', $input->get('task', null, 'Momoseo', 'cmd'));
+		
+		//JRequest::setVar ( 'view', JRequest::getCmd ( 'view', 'Momoseo' ) );
 
 		// call parent behavior
 		parent::display ( $cachable );

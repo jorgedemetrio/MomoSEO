@@ -7,9 +7,9 @@
 	<authorUrl>www.alldreams.com.br</authorUrl>
 	<copyright>Copyright (C) 2015. All Rights Reserved</copyright>
 	<license>GNU/GPL Version 3 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
-	<version>{VERSAO}</version>
+	<version>1.0.0</version>
 	<description><![CDATA[
-		<h1>Momo SEO ({VERSAO})</h1>
+		<h1>Momo SEO (1.0.0)</h1>
 		<div style="clear: both;"></div>
 		<p>Componente de SEO para integrar.. <strong>Built for Joomla 3.8.</strong></p>
 		<p>Created by <a href="http://www.alldreams.com.br" target="_blank">Jorge Demetrio | www.alldreams.com.br</a>

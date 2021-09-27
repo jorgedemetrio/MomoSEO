@@ -29,8 +29,18 @@ class MomoseoController extends JControllerLegacy {
 	 * @return void
 	 */
 	function display($cachable = false, $urlparams = false) {
+
+		$app = JFactory::getApplication();
+		$input = $app->input;
+
 		// set default view if not set
-		JRequest::setVar ( 'view', JRequest::getCmd ( 'view', 'Momoseo' ) );
+		//JRequest::setVar ( 'view', JRequest::getCmd ( 'view', 'Momoseo' ) );
+
+		$application = JFactory::getApplication();
+		$input = $application->input;
+		
+		$input->set( 'view', $input->get('task', 'Momoseo', 'default', 'cmd'));
+		//$input->( 'view', $app ( 'view', 'Momoseo' ) );
 		
 		// call parent behavior
 		parent::display ( $cachable );
