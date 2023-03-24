@@ -41,7 +41,7 @@ $application = JFactory::getApplication();
 $input = $application->input;
 
 // Perform the request task
-$controller->execute($input->get('task', null, 'Momoseo', 'cmd'));//JRequest::getCmd('task'));
+$controller->execute($input->get('task', null, 'default', 'cmd'));//JRequest::getCmd('task'));
 
 
 
