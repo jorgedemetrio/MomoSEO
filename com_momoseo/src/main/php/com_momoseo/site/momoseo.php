@@ -25,7 +25,7 @@ if(!defined('VERSAO_MOMOSEO')){
 
 // Set the component css/js
 $document = JFactory::getDocument();
-
+$input = JFactory::getApplication()->getInput();
 
 // Require helper file
 JLoader::register('MomoseoHelper', dirname(__FILE__) . DS . 'helpers' . DS . 'momoseo.php');
@@ -37,11 +37,12 @@ jimport('joomla.application.component.controller');
 
 // Get an instance of the controller prefixed by Momoseo
 $controller = JControllerLegacy::getInstance('Momoseo');
-$application = JFactory::getApplication();
-$input = $application->input;
+
+
+
 
 // Perform the request task
-$controller->execute($input->get('task', null, 'default', 'cmd'));//JRequest::getCmd('task'));
+$controller->execute($input->get('task'));
 
 
 
@@ -50,3 +51,4 @@ $controller->redirect();
 ///templates/protostar/css/template.css
 
 unset($document->_scripts[JURI::root(true) . '/media/system/js/mootools-more.js']);
+

@@ -16,6 +16,9 @@ jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
 jimport('joomla.application.component.helper');
 include_once JPATH_BASE .DS.'components/com_content/models/article.php';
+//require_once JPATH_BASE .DS.'components/com_content/helpers/route.php';
+JLoader::register('ContentHelperRoute', JPATH_SITE . '/components/com_content/helpers/route.php');
+//require_once JPATH_BASE .DS.'components/com_content/helpers/query.php';
 jimport( 'joomla.application.module.helper' );
 jimport( 'joomla.mail.mail' );
 jimport('joomla.log.log');
@@ -28,21 +31,14 @@ jimport('joomla.log.log');
 class MomoseoController extends JControllerLegacy{
 
 	function display($cachable = false, $urlparams = false) {
+	    
+	    $input = JFactory::getApplication()->getInput();
+	    
 		// set default view if not set
-
-		$application = JFactory::getApplication();
-		$input = $application->input;
-		
-		$input->set( 'view', $input->get('task', null, 'Momoseo', 'cmd'));
-		
-		//JRequest::setVar ( 'view', JRequest::getCmd ( 'view', 'Momoseo' ) );
+		$input->set( 'view', $input->get ( 'view', 'Momoseo' ) );
 
 		// call parent behavior
 		parent::display ( $cachable );
-
-		// set view
-		//  $view = strtolower ( JRequest::getVar ( 'view' ) );
-		// Não será mais usado
 
 	}
 
@@ -60,7 +56,7 @@ class MomoseoController extends JControllerLegacy{
 	public function sitemapContent(){
 		$db = JFactory::getDbo ();
 		$host = $_SERVER[MomoseoController::HTTPS_HOST] ;
-
+        $ssl = JUri::getInstance()->isSsl() ? 1 : -1;
 		$publish_up = $db->quoteName ( 'publish_up' );
 
 		$query = $db->getQuery ( true );
@@ -74,11 +70,16 @@ class MomoseoController extends JControllerLegacy{
 		$results = $db->loadObjectList();
 		$xml = MomoseoController::HEADER_XML_SITEMAOP;
 		foreach ( $results as $result){
-			$url = $host . JRoute::_(ContentHelperRoute::getArticleRoute($result->slug, $result->catid, $result->language));
+		    
+			//$url = $host . JRoute::_(ContentHelperRoute::getArticleRoute($result->slug, $result->catid, $result->language));
+			
+			$url = str_replace('&', '&amp;',JRoute::link('site', ContentHelperRoute::getArticleRoute($result->id, $result->catid, $result->language), false, $ssl));
+			
+			
 			$xml = $xml . MomoseoController::SITEMAP_TAGS1;
 			$xml = $xml . "\t\t<lastmod>" . JFactory::getDate($result->modified)->format('Y-m-d\TH:i:sP')  . "</lastmod>\n";
 			$xml = $xml . MomoseoController::SITEMAP_TAGS2;
-			$xml = $xml . "\t\t<loc>http://$url</loc>\n";
+			$xml = $xml . "\t\t<loc>$url</loc>\n";
 			$xml = $xml . MomoseoController::SITEMAP_TAGS3;
 		}
 		$xml = $xml . MomoseoController::SITEMAP_TAGS4;
@@ -102,10 +103,10 @@ class MomoseoController extends JControllerLegacy{
             $results = $db->loadObjectList();
             $xml = MomoseoController::HEADER_XML_SITEMAOP;
             foreach ( $results as $result){
-                        $url = $host.'/component/tags/tag/' . $result->id  . '-' . $result->path  . '.html';
+                        $url = str_replace('&', '&amp;',$host.'/component/tags/tag/' . $result->id  . '-' . $result->path  . '.html');
                         $xml = $xml . MomoseoController::SITEMAP_TAGS1;
                         $xml = $xml . MomoseoController::SITEMAP_TAGS2;
-                        $xml = $xml . "\t\t<loc>http://" .  $url . "</loc>\n";
+                        $xml = $xml . "\t\t<loc>https://" .  $url . "</loc>\n";
                         $xml = $xml . MomoseoController::SITEMAP_TAGS3;
             }
             $xml = $xml . MomoseoController::SITEMAP_TAGS4;
@@ -128,11 +129,11 @@ class MomoseoController extends JControllerLegacy{
       	$results = $db->loadObjectList();
       	$xml = MomoseoController::HEADER_XML_SITEMAOP;
       	foreach ( $results as $result){
-      		$url = (strpos( $result->url,$host)===false? $host : "" )  . $result->url  ;
+      		$url = str_replace('&', '&amp;',(strpos( $result->url,$host)===false? $host : "" )  . $result->url)  ;
       		$xml = $xml . MomoseoController::SITEMAP_TAGS1;
       		$xml = $xml . "\t\t<changefreq>monthly</changefreq>\n";
       		$xml = $xml . "\t\t<priority>" . $result->prioridade  . "</priority>\n";
-      		$xml = $xml . "\t\t<loc>http://" .  $url . "</loc>\n";
+      		$xml = $xml . "\t\t<loc>https://" .  $url . "</loc>\n";
       		$xml = $xml . MomoseoController::SITEMAP_TAGS3;
       	}
       	$xml = $xml . MomoseoController::SITEMAP_TAGS4;
@@ -158,11 +159,16 @@ class MomoseoController extends JControllerLegacy{
 	 * Carrega a tela de bsuca
 	 */
 	public function buscar(){
-		$q = JRequest::getVar('q');
+	    	    
+	    $input = JFactory::getApplication()->getInput();
+	    
+		// set default view if not set
+		
+		$q = $input->get( 'q');
 		JSearchHelper::logSearch($q, 'com_search');
 
-		JRequest::setVar ( 'view', 'busca' );
-		JRequest::setVar ( 'layout', 'default' );
+		$input->set( 'view', 'busca' );
+		$input->set( 'layout', 'default' );
 		parent::display (true, false);
 	}
 
